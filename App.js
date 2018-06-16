@@ -3,7 +3,6 @@ import React from 'react'
 import { ActivityIndicator, View, StyleSheet } from 'react-native'
 import { Provider } from 'react-redux'
 import { COLOR, ThemeProvider } from 'react-native-material-ui'
-
 import { Font } from 'expo'
 
 import store from './src/store'
