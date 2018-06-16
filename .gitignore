@@ -19,3 +19,5 @@ yarn-error.log*
 
 config.json
 .idea
+
+.DS_Store
