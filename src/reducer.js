@@ -12,13 +12,14 @@ export default function reducer(state = initialState, action) {
     case GET_RATES:
         return { ...state, loading: true }
     case GET_RATES_SUCCESS:
+        const data = action.payload.data
         return { 
             ...state, 
             loading: false, 
             rates: {
-                timestamp: action.payload.data.timestamp,
-                base: action.payload.data.base,
-                rates: action.payload.data.rates
+                timestamp: data.timestamp,
+                base: data.base,
+                rates: data.rates
             }
         }
     case GET_RATES_FAIL:

@@ -12,12 +12,6 @@ const clients = {
             headers: { Authorization: `Token ${Config.RATES.TOKEN}` },
             responseType: 'json'
         })
-    },
-    github: {
-        client: axios.create({
-            baseURL: 'https://api.github.com',
-            responseType: 'json'
-        })
     }
 }
 

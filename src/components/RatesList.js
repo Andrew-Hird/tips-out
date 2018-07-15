@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-import { listRepos, listRates } from '../reducer'
+import { listRates } from '../reducer'
 
 class RatesList extends React.Component {
     componentDidMount() {
@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
 const sortRates = ratesObj => {
     if (ratesObj) {
         const ratesKeys = Object.keys(ratesObj)
-        const ratesArr = ratesKeys.map(key =>({ key: key, currency: key, rate: ratesObj[key] }))
-        return ratesArr
+        return ratesKeys.map(key => ({key: key, currency: key, rate: ratesObj[key]}))
     }
     return []
 }
@@ -60,7 +59,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    listRepos,
     listRates
 }
 
