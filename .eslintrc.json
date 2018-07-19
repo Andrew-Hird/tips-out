@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "commonjs": true,
@@ -9,7 +9,7 @@ module.exports = {
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
-            "jsx": true,
+            "jsx": true
         },
         "ecmaVersion": 2017,
         "sourceType": "module"
@@ -37,4 +37,4 @@ module.exports = {
         ],
         "react/jsx-uses-vars": [2]
     }
-};
+}

@@ -1,33 +1,54 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { Container, Header, Content, Form, Item, Input, Label, Text } from 'native-base'
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            price: '',
+            calculatedPrice: '',
+            text: '4567123409871234',
+        }
     }
 
     static navigationOptions = {
         header: null
-    }
+    };
+
+    handlePriceInput = (price) => {
+        console.log(price)
+        this.setState({price})
+        this.calcPrice(price)
+    };
+
+    calcPrice = (price) => {
+        this.setState({
+            calculatedPrice: price * 100
+        })
+    };
 
     render() {
         return (
-            <View style={styles.content}>
-                <Text>Tipping app!</Text>
-                <Button
-                    title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
-                />
-            </View>
+            <Container>
+                <Header />
+                <Content>
+                    <Item floatingLabel>
+                        <Label>Price</Label>
+                        <Input
+                            keyboardType='numeric'
+                            clearButtonMode='always'
+                            onChangeText={this.handlePriceInput}
+                            value={this.state.price}
+                        />
+                    </Item>
+                    <Text>
+                        {this.state.price}
+                    </Text>
+                    <Text>
+                        {this.state.calculatedPrice}
+                    </Text>
+                </Content>
+            </Container>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    content: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})

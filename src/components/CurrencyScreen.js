@@ -3,14 +3,13 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 
 import RatesList from './RatesList'
 
-
 export default class CurrencyScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
     }
 
-    static navigationOptions () {
+    static navigationOptions() {
         return {
             title: 'Currency Conversion'
         }
