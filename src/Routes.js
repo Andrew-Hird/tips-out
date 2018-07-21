@@ -45,11 +45,11 @@ export default createBottomTabNavigator(
                 if (routeName === 'Home') {
                     iconName = `ios-information-circle${focused ? '' : '-outline'}`
                 } else if (routeName === 'Currency') {
-                    iconName = `ios-stats${focused ? '' : '-outline'}`
+                    iconName = 'ios-stats'
                 } else if (routeName === 'Tax') {
-                    iconName = `ios-filing${focused ? '' : '-outline'}`
+                    iconName = 'ios-filing'
                 } else if (routeName === 'Settings') {
-                    iconName = `ios-options${focused ? '' : '-outline'}`
+                    iconName = 'ios-options'
                 }
       
                 // icon component from react-native-vector-icons

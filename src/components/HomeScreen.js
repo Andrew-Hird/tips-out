@@ -7,7 +7,6 @@ export default class HomeScreen extends React.Component {
         this.state = {
             price: '',
             calculatedPrice: '',
-            text: '4567123409871234',
         }
     }
 
