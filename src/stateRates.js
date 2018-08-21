@@ -1,4 +1,4 @@
-const TaxRates = [
+const StateRates = [
     {
         name: 'Texas',
         state: 6.25,
@@ -25,4 +25,4 @@ const TaxRates = [
     }
 ]
 
-export default TaxRates
+export default StateRates

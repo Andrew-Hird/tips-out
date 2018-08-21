@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Grid, Col, Row } from 'native-base'
+import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Grid, Col, Row, Picker, Icon } from 'native-base'
+
+import TaxRates from '../stateRates'
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -8,6 +10,7 @@ export default class HomeScreen extends React.Component {
             price: '',
             tipPercent: '17.5',
             calculatedPrice: '',
+            selectedState: undefined,
         }
     }
 
@@ -15,20 +18,24 @@ export default class HomeScreen extends React.Component {
         header: null
     };
 
+    handleStateSelect = (selectedState) => {
+        this.setState({ selectedState })
+    }
+
     handlePriceInput = (price) => {
-        console.log(price)
-        this.setState({ price })
-        this.calcPrice(price)
+        this.setState({ price }, () => this.calcPrice())
     };
 
     handleTipInput = (tipPercent) => {
-        this.setState({ tipPercent })
+        this.setState({ tipPercent }, () => this.calcPrice())
     }
 
-    calcPrice = (price) => {
-        this.setState({
-            calculatedPrice: price * 100
-        })
+    calcPrice = () => {
+        const { price, tipPercent } = this.state
+
+        let calculatedPrice = price * (tipPercent / 10)
+
+        this.setState({ calculatedPrice })
     };
 
     render() {
@@ -36,10 +43,9 @@ export default class HomeScreen extends React.Component {
 
         return (
             <Container>
-                {/*<Content padder contentContainerStyle={{ flex: 1 }}>*/}
-                <Content padder>
-                    <Grid>
-                        <Row style={{ }}>
+                <Content padder contentContainerStyle={{ flex: 1 }}>
+                    <Grid style={{ marginTop: 20 }}>
+                        <Row>
                             <Col>
                                 <Item floatingLabel>
                                     <Label>Price</Label>
@@ -52,7 +58,7 @@ export default class HomeScreen extends React.Component {
                                 </Item>
                             </Col>
                         </Row>
-                        <Row style={{ }}>
+                        <Row>
                             <Col>
                                 <Item floatingLabel>
                                     <Label>Tip %</Label>
@@ -70,6 +76,7 @@ export default class HomeScreen extends React.Component {
                                             info
                                             bordered={this.state.tipPercent !== percent}
                                             onPress={() => this.handleTipInput(percent)}
+                                            style={{ width: 75 }}
                                         >
                                             <Text>{percent}%</Text>
                                         </Button>
@@ -77,13 +84,12 @@ export default class HomeScreen extends React.Component {
                                 )
                             })}
                         </Row>
+                        <Row size={3}>
+                            <Text>
+                                ${this.state.calculatedPrice}
+                            </Text>
+                        </Row>
                     </Grid>
-                    {/*<Text>*/}
-                        {/*{this.state.price}*/}
-                    {/*</Text>*/}
-                    {/*<Text>*/}
-                        {/*{this.state.calculatedPrice}*/}
-                    {/*</Text>*/}
                 </Content>
             </Container>
         )

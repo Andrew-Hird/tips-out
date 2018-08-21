@@ -14,15 +14,15 @@ const HomeStack = createStackNavigator({
     Details: DetailsScreen,
 })
 
-const CurrencyStack = createStackNavigator({
-    Currency: CurrencyScreen,
-    Details: DetailsScreen,
-})
-
-const TaxStack = createStackNavigator({
-    Tax: TaxScreen,
-    Details: DetailsScreen,
-})
+// const CurrencyStack = createStackNavigator({
+//     Currency: CurrencyScreen,
+//     Details: DetailsScreen,
+// })
+//
+// const TaxStack = createStackNavigator({
+//     Tax: TaxScreen,
+//     Details: DetailsScreen,
+// })
   
 const SettingsStack = createStackNavigator({
     Settings: SettingsScreen,
@@ -33,8 +33,8 @@ const SettingsStack = createStackNavigator({
 export default createBottomTabNavigator(
     {
         Home: HomeStack,
-        Currency: CurrencyStack,
-        Tax: TaxStack,
+        // Currency: CurrencyStack,
+        // Tax: TaxStack,
         Settings: SettingsStack,
     },
     {
@@ -44,10 +44,10 @@ export default createBottomTabNavigator(
                 let iconName
                 if (routeName === 'Home') {
                     iconName = `ios-information-circle${focused ? '' : '-outline'}`
-                } else if (routeName === 'Currency') {
-                    iconName = 'ios-stats'
-                } else if (routeName === 'Tax') {
-                    iconName = 'ios-filing'
+                // } else if (routeName === 'Currency') {
+                //     iconName = 'ios-stats'
+                // } else if (routeName === 'Tax') {
+                //     iconName = 'ios-filing'
                 } else if (routeName === 'Settings') {
                     iconName = 'ios-options'
                 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 
-import TaxRates from '../taxRates'
+import StateRates from '../stateRates'
 
 export default class TaxScreen extends React.Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export default class TaxScreen extends React.Component {
                     title="Go to Details"
                     onPress={() => this.props.navigation.navigate('Details')}
                 />
-                {TaxRates.map((state, i) => {
+                {StateRates.map((state, i) => {
                     return (
                         <View key={i}>
                             <Text>{state.name} - {state.combined}%</Text>
