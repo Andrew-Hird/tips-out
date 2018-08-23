@@ -1,15 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Grid, Col, Row, Picker, Icon } from 'native-base'
+import { listRates, setStateIndex, setCurrency } from '../reducer'
 
-import TaxRates from '../stateRates'
-
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             price: '',
             tipPercent: '17.5',
-            calculatedPrice: '',
+            calculatedPrice: '0',
             selectedState: undefined,
         }
     }
@@ -17,10 +17,6 @@ export default class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
-
-    handleStateSelect = (selectedState) => {
-        this.setState({ selectedState })
-    }
 
     handlePriceInput = (price) => {
         this.setState({ price }, () => this.calcPrice())
@@ -31,9 +27,12 @@ export default class HomeScreen extends React.Component {
     }
 
     calcPrice = () => {
-        const { price, tipPercent } = this.state
+        const price = parseFloat(this.state.price) || 0
+        const tipPercent = parseFloat(this.state.tipPercent)
 
-        let calculatedPrice = price * (tipPercent / 10)
+        const tip = price * (tipPercent / 100)
+
+        let calculatedPrice = price + tip
 
         this.setState({ calculatedPrice })
     };
@@ -95,3 +94,20 @@ export default class HomeScreen extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        rates: state.rates.rates,
+        selectedStateIndex: state.selectedStateIndex,
+        selectedCurrency: state.selectedCurrency,
+    }
+}
+
+const mapDispatchToProps = {
+    listRates,
+    setStateIndex,
+    setCurrency
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+

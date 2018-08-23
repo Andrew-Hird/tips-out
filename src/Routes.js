@@ -59,6 +59,8 @@ export default createBottomTabNavigator(
         tabBarOptions: {
             activeTintColor: 'tomato',
             inactiveTintColor: 'gray',
+            showLabel: false,
+            style: {height: 40}
         }
     }
 )

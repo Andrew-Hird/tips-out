@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Content, Form, Item, Label, Picker, Icon } from 'native-base'
+import { Container, Content, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import StateRates from '../stateRates'
 import { connect } from 'react-redux'
 import { listRates, setStateIndex, setCurrency } from '../reducer'
@@ -12,10 +12,6 @@ class SettingsScreen extends React.Component {
             selectedState: props.selectedStateIndex,
             selectedCurrency: props.selectedCurrency,
         }
-    }
-
-    componentDidMount() {
-        this.props.listRates()
     }
 
     static navigationOptions () {
@@ -38,13 +34,21 @@ class SettingsScreen extends React.Component {
         const countryRates = this.props.rates.rates
         return (
             <Container>
-                <Content padder>
+                <Content padder contentContainerStyle={{ flex: 1 }}>
+                    <Button
+                        block
+                        info
+                        onPress={this.props.listRates}
+                        disabled={this.props.loading}
+                    >
+                        <Icon name='refresh' />
+                        <Text>Get Rates</Text>
+                    </Button>
                     <Item picker>
                         <Label>Home Currency</Label>
                         <Picker
                             mode="dropdown"
-                            iosIcon={<Icon name="ios-arrow-down-outline" />}
-                            // style={{ height: 50, width: 100 }}
+                            iosIcon={<Icon name="arrow-down" />}
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
@@ -62,8 +66,7 @@ class SettingsScreen extends React.Component {
                         <Label>State</Label>
                         <Picker
                             mode="dropdown"
-                            iosIcon={<Icon name="ios-arrow-down-outline" />}
-                            // style={{ height: 50, width: 100 }}
+                            iosIcon={<Icon name="arrow-down" />}
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
@@ -100,6 +103,7 @@ const mapStateToProps = state => {
         rates: rates,
         selectedStateIndex: state.selectedStateIndex,
         selectedCurrency: state.selectedCurrency,
+        loading: state.loading
     }
 }
 
