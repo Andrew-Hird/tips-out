@@ -45,17 +45,13 @@ export default class App extends React.Component {
 
             if (!todaysRates) {
                 console.log('Updating rates')
-                this.listRates()
+                store.dispatch(listRates())
             } else {
                 console.log('Rates current')
             }
         } else {
-            this.listRates()
+            store.dispatch(listRates())
         }
-    }
-
-    listRates() {
-        store.dispatch(listRates())
     }
 
     render() {

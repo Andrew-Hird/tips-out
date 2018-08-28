@@ -48,6 +48,7 @@ class SettingsScreen extends React.Component {
                         <Label>Home Currency</Label>
                         <Picker
                             mode="dropdown"
+                            iosHeader="Home Currency"
                             iosIcon={<Icon name="arrow-down" />}
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
@@ -66,6 +67,7 @@ class SettingsScreen extends React.Component {
                         <Label>State</Label>
                         <Picker
                             mode="dropdown"
+                            iosHeader="Destination Currency"
                             iosIcon={<Icon name="arrow-down" />}
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
