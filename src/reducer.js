@@ -7,7 +7,11 @@ export const SET_STATE_INDEX = 'tips-out/state/SET'
 export const SET_CURRENCY = 'tips-out/currency/SET'
 
 const initialState = {
-    rates: {},
+    rates: {
+        timestamp: '',
+        base: '',
+        rates: {},
+    },
     selectedStateIndex: 0,
     selectedCurrency: 'NZD',
 }
