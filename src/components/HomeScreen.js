@@ -52,10 +52,8 @@ class HomeScreen extends React.Component {
 
     getCalculatedPrice() {
         const price = parseFloat(this.state.price) || 0
-        const conversionRate = parseFloat(this.props.selectedCurrencyRate)
 
-        return (price + this.getTipAmount() + this.getTaxAmount())
-        // return (price + this.getTipAmount() + this.getTaxAmount()) * conversionRate
+        return price + this.getTipAmount() + this.getTaxAmount()
     }
 
     formatPrice(price) {
@@ -120,7 +118,7 @@ class HomeScreen extends React.Component {
                             <Text>
                                 Tip ({this.state.tipPercent}%)
                                 {'\n'}
-                                {this.formatPrice(this.getTipAmount())} ({this.convertAndFormatPrice(this.getTaxAmount())})
+                                {this.formatPrice(this.getTipAmount())} ({this.convertAndFormatPrice(this.getTipAmount())})
                             </Text>
                         </Row>
                         <Row>
