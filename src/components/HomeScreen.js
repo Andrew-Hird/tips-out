@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Grid, Col, Row, Picker, Icon } from 'native-base'
+import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, ListItem, Body } from 'native-base'
 import numeral from 'numeral'
-import { listRates, setStateIndex, setCurrency } from '../reducer'
+import { listRates, setStateIndex, setCurrency, setOptions } from '../reducer'
 import StateRates from '../stateRates'
 
 
@@ -21,18 +21,35 @@ class HomeScreen extends React.Component {
 
     static navigationOptions = {
         header: null
-    };
-
-    componentDidUpdate(){
-        console.log('updated!')
     }
 
     handlePriceInput = (price) => {
         this.setState({ price })
-    };
+    }
 
     handleTipInput = (tipPercent) => {
         this.setState({ tipPercent })
+    }
+
+    handleTipSelect = () => {
+        this.setOptions('tip')
+
+    }
+
+    handleStateSelect = () => {
+        this.setOptions('state')
+    }
+
+    handleOffshoreSelectSelect = () => {
+        this.setOptions('margin')
+    }
+
+    setOptions(key) {
+        const options = {
+            ...this.props.options,
+            [key]: !this.props.options[key],
+        }
+        this.props.setOptions(options)
     }
 
     getTipAmount() {
@@ -50,10 +67,24 @@ class HomeScreen extends React.Component {
         return price * (taxRate / 100)
     }
 
+    getOffshoreMarginAmount() {
+        const price = parseFloat(this.state.price) || 0
+        const offshoreMargin = parseFloat(this.props.offshoreMargin)
+
+        const tip = this.props.options.tip? this.getTipAmount() : 0
+        const tax = this.props.options.state? this.getTaxAmount() : 0
+
+        return (price + tip + tax) * (offshoreMargin / 100)
+    }
+
     getCalculatedPrice() {
         const price = parseFloat(this.state.price) || 0
 
-        return price + this.getTipAmount() + this.getTaxAmount()
+        const tip = this.props.options.tip? this.getTipAmount() : 0
+        const tax = this.props.options.state? this.getTaxAmount() : 0
+        const margin = this.props.options.margin ? this.getOffshoreMarginAmount() : 0
+
+        return price + tip + tax + margin
     }
 
     formatPrice(price) {
@@ -62,7 +93,6 @@ class HomeScreen extends React.Component {
 
     convertAndFormatPrice(price) {
         const conversionRate = parseFloat(this.props.selectedCurrencyRate)
-
         const convertedPrice  = price * conversionRate
 
         return `${numeral(convertedPrice).format('$0,0.00')} ${this.props.selectedCurrency}`
@@ -115,18 +145,37 @@ class HomeScreen extends React.Component {
                             })}
                         </Row>
                         <Row>
-                            <Text>
-                                Tip ({this.state.tipPercent}%)
-                                {'\n'}
-                                {this.formatPrice(this.getTipAmount())} ({this.convertAndFormatPrice(this.getTipAmount())})
-                            </Text>
+                            <Col>
+                                <Text>Tip ({this.state.tipPercent}%)</Text>
+                                <ListItem onPress={this.handleTipSelect}>
+                                    <CheckBox checked={this.props.options.tip} onPress={this.handleTipSelect} />
+                                    <Body>
+                                        <Text>{this.formatPrice(this.getTipAmount())} ({this.convertAndFormatPrice(this.getTipAmount())})</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
                         </Row>
                         <Row>
-                            <Text>
-                                State Tax ({this.props.selectedStateName} - {this.props.selectedStateRate}%)
-                                {'\n'}
-                                {this.formatPrice(this.getTaxAmount())} ({this.convertAndFormatPrice(this.getTaxAmount())})
-                            </Text>
+                            <Col>
+                                <Text>State Tax ({this.props.selectedStateName} - {this.props.selectedStateRate}%)</Text>
+                                <ListItem onPress={this.handleStateSelect}>
+                                    <CheckBox checked={this.props.options.state} onPress={this.handleStateSelect} />
+                                    <Body>
+                                        <Text>{this.formatPrice(this.getTaxAmount())} ({this.convertAndFormatPrice(this.getTaxAmount())})</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Text>Offshore Service Margin ({this.props.offshoreMargin}%)</Text>
+                                <ListItem onPress={this.handleOffshoreSelectSelect}>
+                                    <CheckBox checked={this.props.options.margin} onPress={this.handleOffshoreSelectSelect} />
+                                    <Body>
+                                        <Text>{this.convertAndFormatPrice(this.getOffshoreMarginAmount())}</Text>
+                                    </Body>
+                                </ListItem>
+                            </Col>
                         </Row>
                         <Row size={3}>
                             <Text>
@@ -149,14 +198,17 @@ const mapStateToProps = state => {
         selectedStateRate: StateRates[state.selectedStateIndex].combined,
         selectedStateIndex: state.selectedStateIndex,
         selectedCurrency: state.selectedCurrency,
-        selectedCurrencyRate: state.rates.rates[state.selectedCurrency]
+        selectedCurrencyRate: state.rates.rates[state.selectedCurrency],
+        offshoreMargin: state.offshoreMargin,
+        options: state.options,
     }
 }
 
 const mapDispatchToProps = {
     listRates,
     setStateIndex,
-    setCurrency
+    setCurrency,
+    setOptions
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

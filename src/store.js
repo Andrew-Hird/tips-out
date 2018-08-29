@@ -10,7 +10,7 @@ import reducer from './reducer'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['rates', 'selectedStateIndex', 'selectedCurrency']
+    whitelist: ['rates', 'selectedStateIndex', 'selectedCurrency', 'offshoreMargin', 'options']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

@@ -5,6 +5,7 @@ export const GET_RATES_FAIL = 'tips-out/rates/LOAD_FAIL'
 
 export const SET_STATE_INDEX = 'tips-out/state/SET'
 export const SET_CURRENCY = 'tips-out/currency/SET'
+export const SET_OPTIONS = 'tips-out/options/SET'
 
 const initialState = {
     rates: {
@@ -14,6 +15,12 @@ const initialState = {
     },
     selectedStateIndex: 0,
     selectedCurrency: 'NZD',
+    offshoreMargin: '2.10',
+    options: {
+        tip: true,
+        state: true,
+        margin: true,
+    }
 }
 
 export default function reducer(state = initialState, action) {
@@ -47,6 +54,11 @@ export default function reducer(state = initialState, action) {
             ...state,
             selectedCurrency: action.payload.currency
         }
+    case SET_OPTIONS:
+        return {
+            ...state,
+            options: action.payload
+        }
     default:
         return state
     }
@@ -79,5 +91,12 @@ export function setCurrency(currency) {
         payload: {
             currency
         }
+    }
+}
+
+export function setOptions(options) {
+    return {
+        type: SET_OPTIONS,
+        payload: options
     }
 }
