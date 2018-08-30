@@ -1,4 +1,5 @@
 import React from 'react'
+import { Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, ListItem, Body } from 'native-base'
 import numeral from 'numeral'
@@ -23,6 +24,10 @@ class HomeScreen extends React.Component {
         header: null
     }
 
+    hideKeyboard() {
+        Keyboard.dismiss()
+    }
+
     handlePriceInput = (price) => {
         this.setState({ price })
     }
@@ -33,15 +38,18 @@ class HomeScreen extends React.Component {
 
     handleTipSelect = () => {
         this.setOptions('tip')
+        this.hideKeyboard()
 
     }
 
     handleStateSelect = () => {
         this.setOptions('state')
+        this.hideKeyboard()
     }
 
     handleOffshoreSelectSelect = () => {
         this.setOptions('margin')
+        this.hideKeyboard()
     }
 
     setOptions(key) {
@@ -79,12 +87,17 @@ class HomeScreen extends React.Component {
 
     getCalculatedPrice() {
         const price = parseFloat(this.state.price) || 0
-
         const tip = this.props.options.tip? this.getTipAmount() : 0
         const tax = this.props.options.state? this.getTaxAmount() : 0
+
+        return price + tip + tax
+    }
+
+    getCalculatedPricePlusMargin() {
+        const calculatedPrice = this.getCalculatedPrice()
         const margin = this.props.options.margin ? this.getOffshoreMarginAmount() : 0
 
-        return price + tip + tax + margin
+        return calculatedPrice + margin
     }
 
     formatPrice(price) {
@@ -135,7 +148,10 @@ class HomeScreen extends React.Component {
                                         <Button
                                             info
                                             bordered={this.state.tipPercent !== percent}
-                                            onPress={() => this.handleTipInput(percent)}
+                                            onPress={() => {
+                                                this.handleTipInput(percent)
+                                                this.hideKeyboard()
+                                            }}
                                             style={{ width: 75 }}
                                         >
                                             <Text>{percent}%</Text>
@@ -181,7 +197,7 @@ class HomeScreen extends React.Component {
                             <Text>
                                 Total
                                 {'\n'}
-                                {this.formatPrice(this.getCalculatedPrice())} ({this.convertAndFormatPrice(this.getCalculatedPrice())})
+                                {this.formatPrice(this.getCalculatedPrice())} ({this.convertAndFormatPrice(this.getCalculatedPricePlusMargin())})
                             </Text>
                         </Row>
                     </Grid>
