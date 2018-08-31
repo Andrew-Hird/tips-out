@@ -1,4 +1,5 @@
 import React from 'react'
+import { View, ActivityIndicator } from 'react-native'
 import { Container, Content, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import StateRates from '../stateRates'
 import { connect } from 'react-redux'
@@ -41,7 +42,13 @@ class SettingsScreen extends React.Component {
                         onPress={this.props.listRates}
                         disabled={this.props.loading}
                     >
-                        <Icon name='refresh' />
+                        {this.props.loading ? (
+                            <ActivityIndicator size="small" />
+                        ) : (
+                            <View>
+                                <Icon name='refresh' />
+                            </View>
+                        )}
                         <Text>Get Rates</Text>
                     </Button>
                     <Item picker>
