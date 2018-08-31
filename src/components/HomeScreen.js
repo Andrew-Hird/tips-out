@@ -164,22 +164,6 @@ class HomeScreen extends React.Component {
                                 >
                                     <Text>Other</Text>
                                 </Button>
-                                <Modal
-                                    isVisible={this.state.showInputModal}
-                                    onBackdropPress={() => this.setState({ showInputModal: false })}
-                                >
-                                    <View style={styles.modalContent}>
-                                        <Item floatingLabel>
-                                            <Label>Tip %</Label>
-                                            <Input
-                                                keyboardType='numeric'
-                                                clearButtonMode='always'
-                                                onChangeText={this.handleTipInput}
-                                                value={this.state.tipPercent}
-                                            />
-                                        </Item>
-                                    </View>
-                                </Modal>
                             </Col>
                         </Row>
                         <Row>
@@ -224,6 +208,24 @@ class HomeScreen extends React.Component {
                         </Row>
                     </Grid>
                 </Content>
+                <Modal
+                    isVisible={this.state.showInputModal}
+                    onBackdropPress={() => this.setState({ showInputModal: false })}
+                >
+                    <View style={styles.modalContent}>
+                        <Item floatingLabel>
+                            <Label>Tip %</Label>
+                            <Input
+                                keyboardType='numeric'
+                                clearButtonMode='always'
+                                onChangeText={this.handleTipInput}
+                                value={this.state.tipPercent}
+                                autoFocus={true}
+                                selectTextOnFocus={true}
+                            />
+                        </Item>
+                    </View>
+                </Modal>
             </Container>
         )
     }
