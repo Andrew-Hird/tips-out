@@ -1,3 +1,5 @@
+import { Toast } from 'native-base'
+
 
 export const GET_RATES = 'tips-out/rates/LOAD'
 export const GET_RATES_SUCCESS = 'tips-out/rates/LOAD_SUCCESS'
@@ -28,6 +30,7 @@ export default function reducer(state = initialState, action) {
     case GET_RATES:
         return { ...state, loading: true }
     case GET_RATES_SUCCESS:
+        Toast.show({ text: 'Rates Updated' })
         const data = action.payload.data
         return { 
             ...state, 
@@ -39,6 +42,7 @@ export default function reducer(state = initialState, action) {
             }
         }
     case GET_RATES_FAIL:
+        Toast.show({ text: 'Could not update rates at this time', type: 'danger' })
         return {
             ...state,
             loading: false,

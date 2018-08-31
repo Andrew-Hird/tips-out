@@ -1,5 +1,6 @@
 import React from 'react'
-import { ActivityIndicator, View, StyleSheet, AppState } from 'react-native'
+import { ActivityIndicator, StyleSheet, AppState } from 'react-native'
+import { Root } from 'native-base'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
@@ -58,12 +59,12 @@ export default class App extends React.Component {
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={this.persistor}>
-                    <View style={styles.container}>
+                    <Root style={styles.container}>
                         <AppNavigator
                             persistenceKey={'NavigationState5'}
                             renderLoadingExperimental={() => <ActivityIndicator />}
                         />
-                    </View>
+                    </Root>
                 </PersistGate>
             </Provider>
         )
