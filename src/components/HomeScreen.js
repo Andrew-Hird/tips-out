@@ -1,5 +1,6 @@
 import React from 'react'
-import { Keyboard } from 'react-native'
+import { Keyboard, View, StyleSheet } from 'react-native'
+import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
 import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, ListItem, Body } from 'native-base'
 import numeral from 'numeral'
@@ -17,12 +18,16 @@ class HomeScreen extends React.Component {
             taxAmount: '0',
             calculatedPrice: '0',
             selectedState: undefined,
+            showInputModal: false,
         }
     }
 
     static navigationOptions = {
         header: null
     }
+
+    _toggleModal = () =>
+        this.setState({ isModalVisible: !this.state.isModalVisible })
 
     hideKeyboard() {
         Keyboard.dismiss()
@@ -112,8 +117,6 @@ class HomeScreen extends React.Component {
     }
 
     render() {
-        const defaultPercents = [ '15', '17.5', '20' ]
-
         return (
             <Container>
                 <Content padder contentContainerStyle={{ flex: 1 }}>
@@ -132,17 +135,7 @@ class HomeScreen extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <Item floatingLabel>
-                                    <Label>Tip %</Label>
-                                    <Input
-                                        keyboardType='numeric'
-                                        onChangeText={this.handleTipInput}
-                                        value={this.state.tipPercent}
-                                    />
-                                </Item>
-                            </Col>
-                            {defaultPercents.map((percent, i) => {
+                            {this.props.defaultPercents.map((percent, i) => {
                                 return (
                                     <Col key={i}>
                                         <Button
@@ -159,6 +152,35 @@ class HomeScreen extends React.Component {
                                     </Col>
                                 )
                             })}
+                            <Col>
+                                <Button
+                                    info
+                                    bordered={this.state.tipPercent === this.props.defaultPercents.find(percent => percent === this.state.tipPercent)}
+                                    onPress={() => {
+                                        this.setState({ showInputModal: true })
+                                        this.hideKeyboard()
+                                    }}
+                                    style={{ width: 75 }}
+                                >
+                                    <Text>Other</Text>
+                                </Button>
+                                <Modal
+                                    isVisible={this.state.showInputModal}
+                                    onBackdropPress={() => this.setState({ showInputModal: false })}
+                                >
+                                    <View style={styles.modalContent}>
+                                        <Item floatingLabel>
+                                            <Label>Tip %</Label>
+                                            <Input
+                                                keyboardType='numeric'
+                                                clearButtonMode='always'
+                                                onChangeText={this.handleTipInput}
+                                                value={this.state.tipPercent}
+                                            />
+                                        </Item>
+                                    </View>
+                                </Modal>
+                            </Col>
                         </Row>
                         <Row>
                             <Col>
@@ -217,6 +239,7 @@ const mapStateToProps = state => {
         selectedCurrencyRate: state.rates.rates[state.selectedCurrency],
         offshoreMargin: state.offshoreMargin,
         options: state.options,
+        defaultPercents: [ '15', '17.5', '20' ],
     }
 }
 
@@ -226,6 +249,15 @@ const mapDispatchToProps = {
     setCurrency,
     setOptions
 }
+
+const styles = StyleSheet.create({
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)'
+    },
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
 
