@@ -149,11 +149,11 @@ class HomeScreen extends React.Component {
                         <Row>
                             <Col>
                                 <Row>
-                                    <Col size={15} style={styles.col}>
+                                    <Col size={15} style={styles.col} onPress={this.handleTipSelect}>
                                         <CheckBox checked={this.props.options.tip} onPress={this.handleTipSelect} />
                                     </Col>
                                     <Col size={75} style={styles.col}>
-                                        <Text onPress={this.handleTipSelect}>Tip ({this.state.tipPercent}%)</Text>
+                                        <Text>Tip ({this.state.tipPercent}%)</Text>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -208,11 +208,11 @@ class HomeScreen extends React.Component {
                         <Row style={styles.row}>
                             <Col>
                                 <Row>
-                                    <Col size={15} style={styles.col}>
+                                    <Col size={15} style={styles.col} onPress={this.handleStateSelect}>
                                         <CheckBox checked={this.props.options.state} onPress={this.handleStateSelect} />
                                     </Col>
                                     <Col size={75} style={styles.col}>
-                                        <Text onPress={this.handleStateSelect}>State Tax ({this.props.selectedStateName} - {this.props.selectedStateRate}%)</Text>
+                                        <Text>State Tax ({this.props.selectedStateName} - {this.props.selectedStateRate}%)</Text>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -230,11 +230,11 @@ class HomeScreen extends React.Component {
 
                         <Row style={styles.row}>
                             <Row>
-                                <Col size={15} style={styles.col}>
+                                <Col size={15} style={styles.col} onPress={this.handleOffshoreSelectSelect}>
                                     <CheckBox checked={this.props.options.margin} onPress={this.handleOffshoreSelectSelect} />
                                 </Col>
                                 <Col size={35} style={styles.col}>
-                                    <Text onPress={this.handleOffshoreSelectSelect}>Offshore Service Margin ({this.props.offshoreMargin}%)</Text>
+                                    <Text>Offshore Service Margin ({this.props.offshoreMargin}%)</Text>
                                 </Col>
                                 <Col size={50} style={styles.col}>
                                     {this.renderPriceButton(this.convertAndFormatPrice(this.getOffshoreMarginAmount()), 'flex-end')}
@@ -319,7 +319,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     row: {
-        height: 60,
         marginTop: 10,
         marginBottom: 10,
     },
