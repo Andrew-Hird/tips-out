@@ -8,6 +8,8 @@ import { listRates, setStateIndex, setCurrency, setOptions } from '../reducer'
 import StateRates from '../stateRates'
 
 import Divider from '../components/Divider'
+import TotalBadge from '../components/TotalBadge'
+import PriceBadge from '../components/PriceBadge'
 
 
 class HomeScreen extends React.Component {
@@ -121,7 +123,7 @@ class HomeScreen extends React.Component {
     renderPriceButton(price, position, large) {
 
         return (
-            <Button rounded light small={!large} disabled style={{ alignSelf: position }}>
+            <Button rounded light small={!large} style={{ alignSelf: position }} disabled>
                 <Text>{price}</Text>
             </Button>
         )
@@ -150,7 +152,7 @@ class HomeScreen extends React.Component {
                             <Col>
                                 <Row>
                                     <Col size={15} style={styles.col} onPress={this.handleTipSelect}>
-                                        <CheckBox checked={this.props.options.tip} onPress={this.handleTipSelect} />
+                                        <CheckBox checked={this.props.options.tip} onPress={this.handleTipSelect} color="#007aff" />
                                     </Col>
                                     <Col size={75} style={styles.col}>
                                         <Text>Tip ({this.state.tipPercent}%)</Text>
@@ -161,7 +163,8 @@ class HomeScreen extends React.Component {
                                         return (
                                             <Col key={i} style={styles.col}>
                                                 <Button
-                                                    info
+                                                    primary
+                                                    disabled={!this.props.options.tip}
                                                     bordered={this.state.tipPercent !== percent}
                                                     onPress={() => {
                                                         this.handleTipInput(percent)
@@ -176,7 +179,8 @@ class HomeScreen extends React.Component {
                                     })}
                                     <Col style={styles.col}>
                                         <Button
-                                            info
+                                            primary
+                                            disabled={!this.props.options.tip}
                                             bordered={this.state.tipPercent === this.props.defaultPercents.find(percent => percent === this.state.tipPercent)}
                                             onPress={() => {
                                                 this.setState({ showInputModal: true })
@@ -194,10 +198,17 @@ class HomeScreen extends React.Component {
                             <Col>
                                 <Row>
                                     <Col>
-                                        {this.renderPriceButton(this.formatPrice(this.getTipAmount()), 'flex-start')}
+                                        <PriceBadge
+                                            disabled={!this.props.options.tip}
+                                            label={this.formatPrice(this.getTipAmount())}
+                                        />
                                     </Col>
                                     <Col>
-                                        {this.renderPriceButton(this.convertAndFormatPrice(this.getTipAmount()), 'flex-end')}
+                                        <PriceBadge
+                                            right
+                                            disabled={!this.props.options.tip}
+                                            label={this.convertAndFormatPrice(this.getTipAmount())}
+                                        />
                                     </Col>
                                 </Row>
                             </Col>
@@ -209,7 +220,7 @@ class HomeScreen extends React.Component {
                             <Col>
                                 <Row>
                                     <Col size={15} style={styles.col} onPress={this.handleStateSelect}>
-                                        <CheckBox checked={this.props.options.state} onPress={this.handleStateSelect} />
+                                        <CheckBox checked={this.props.options.state} onPress={this.handleStateSelect} color="#007aff" />
                                     </Col>
                                     <Col size={75} style={styles.col}>
                                         <Text>State Tax ({this.props.selectedStateName} - {this.props.selectedStateRate}%)</Text>
@@ -217,10 +228,17 @@ class HomeScreen extends React.Component {
                                 </Row>
                                 <Row>
                                     <Col style={styles.col}>
-                                        {this.renderPriceButton(this.formatPrice(this.getTaxAmount()), 'flex-start')}
+                                        <PriceBadge
+                                            disabled={!this.props.options.state}
+                                            label={this.formatPrice(this.getTaxAmount())}
+                                        />
                                     </Col>
                                     <Col style={styles.col}>
-                                        {this.renderPriceButton(this.convertAndFormatPrice(this.getTaxAmount()), 'flex-end')}
+                                        <PriceBadge
+                                            right
+                                            disabled={!this.props.options.state}
+                                            label={this.convertAndFormatPrice(this.getTaxAmount())}
+                                        />
                                     </Col>
                                 </Row>
                             </Col>
@@ -231,13 +249,17 @@ class HomeScreen extends React.Component {
                         <Row style={styles.row}>
                             <Row>
                                 <Col size={15} style={styles.col} onPress={this.handleOffshoreSelectSelect}>
-                                    <CheckBox checked={this.props.options.margin} onPress={this.handleOffshoreSelectSelect} />
+                                    <CheckBox checked={this.props.options.margin} onPress={this.handleOffshoreSelectSelect} color="#007aff" />
                                 </Col>
                                 <Col size={35} style={styles.col}>
                                     <Text>Offshore Service Margin ({this.props.offshoreMargin}%)</Text>
                                 </Col>
                                 <Col size={50} style={styles.col}>
-                                    {this.renderPriceButton(this.convertAndFormatPrice(this.getOffshoreMarginAmount()), 'flex-end')}
+                                    <PriceBadge
+                                        right
+                                        disabled={!this.props.options.margin}
+                                        label={this.convertAndFormatPrice(this.getOffshoreMarginAmount())}
+                                    />
                                 </Col>
                             </Row>
                         </Row>
@@ -253,10 +275,10 @@ class HomeScreen extends React.Component {
                                 </Row>
                                 <Row>
                                     <Col style={styles.col}>
-                                        {this.renderPriceButton(this.formatPrice(this.getCalculatedPrice()), 'flex-start', true)}
+                                        <TotalBadge label={this.formatPrice(this.getCalculatedPrice())} />
                                     </Col>
                                     <Col style={styles.col}>
-                                        {this.renderPriceButton(this.convertAndFormatPrice(this.getCalculatedPricePlusMargin()), 'flex-end', true)}
+                                        <TotalBadge label={this.convertAndFormatPrice(this.getCalculatedPricePlusMargin())} right />
                                     </Col>
                                 </Row>
                             </Col>

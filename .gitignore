@@ -1,5 +1,7 @@
 config.json
 
+.expo
+
 # OSX
 #
 .DS_Store
