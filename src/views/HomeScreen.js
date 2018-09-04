@@ -2,7 +2,7 @@ import React from 'react'
 import { Keyboard, View, StyleSheet } from 'react-native'
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
-import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, Icon, ListItem, Body, H2, H3 } from 'native-base'
+import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, Icon, H2 } from 'native-base'
 import numeral from 'numeral'
 import { listRates, setStateIndex, setCurrency, setOptions } from '../reducer'
 import StateRates from '../stateRates'
@@ -118,15 +118,6 @@ class HomeScreen extends React.Component {
         const convertedPrice  = price * conversionRate
 
         return `${numeral(convertedPrice).format('$0,0.00')} ${this.props.selectedCurrency}`
-    }
-
-    renderPriceButton(price, position, large) {
-
-        return (
-            <Button rounded light small={!large} style={{ alignSelf: position }} disabled>
-                <Text>{price}</Text>
-            </Button>
-        )
     }
 
     render() {
@@ -268,11 +259,11 @@ class HomeScreen extends React.Component {
 
                         <Row style={styles.row}>
                             <Col>
-                                <Row>
-                                    <Col style={styles.col}>
-                                        <H2>Total</H2>
-                                    </Col>
-                                </Row>
+                                {/*<Row>*/}
+                                    {/*<Col style={styles.col}>*/}
+                                        {/*<H2>Total</H2>*/}
+                                    {/*</Col>*/}
+                                {/*</Row>*/}
                                 <Row>
                                     <Col style={styles.col}>
                                         <TotalBadge label={this.formatPrice(this.getCalculatedPrice())} />
