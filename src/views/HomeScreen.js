@@ -4,7 +4,7 @@ import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
 import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, Icon, H2 } from 'native-base'
 import numeral from 'numeral'
-import { listRates, setStateIndex, setCurrency, setOptions } from '../reducer'
+import { listRates, setOptions } from '../reducer'
 import StateRates from '../stateRates'
 
 import Divider from '../components/Divider'
@@ -29,9 +29,6 @@ class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null
     }
-
-    _toggleModal = () =>
-        this.setState({ isModalVisible: !this.state.isModalVisible })
 
     hideKeyboard() {
         Keyboard.dismiss()
@@ -259,11 +256,6 @@ class HomeScreen extends React.Component {
 
                         <Row style={styles.row}>
                             <Col>
-                                {/*<Row>*/}
-                                    {/*<Col style={styles.col}>*/}
-                                        {/*<H2>Total</H2>*/}
-                                    {/*</Col>*/}
-                                {/*</Row>*/}
                                 <Row>
                                     <Col style={styles.col}>
                                         <TotalBadge label={this.formatPrice(this.getCalculatedPrice())} />
@@ -303,12 +295,12 @@ const mapStateToProps = state => {
     return {
         rates: state.rates.rates,
         baseCurrency: state.rates.base,
-        selectedStateName: StateRates[state.selectedStateIndex].name,
-        selectedStateRate: StateRates[state.selectedStateIndex].combined,
-        selectedStateIndex: state.selectedStateIndex,
-        selectedCurrency: state.selectedCurrency,
-        selectedCurrencyRate: state.rates.rates[state.selectedCurrency],
-        offshoreMargin: state.offshoreMargin,
+        selectedStateName: StateRates[state.settings.selectedStateIndex].name,
+        selectedStateRate: StateRates[state.settings.selectedStateIndex].combined,
+        selectedStateIndex: state.settings.selectedStateIndex,
+        selectedCurrency: state.settings.selectedCurrency,
+        selectedCurrencyRate: state.rates.rates[state.settings.selectedCurrency],
+        offshoreMargin: state.settings.offshoreMargin,
         options: state.options,
         defaultPercents: [ '15', '17.5', '20' ],
     }
@@ -316,8 +308,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     listRates,
-    setStateIndex,
-    setCurrency,
     setOptions
 }
 

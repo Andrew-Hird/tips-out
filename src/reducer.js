@@ -5,9 +5,8 @@ export const GET_RATES = 'tips-out/rates/LOAD'
 export const GET_RATES_SUCCESS = 'tips-out/rates/LOAD_SUCCESS'
 export const GET_RATES_FAIL = 'tips-out/rates/LOAD_FAIL'
 
-export const SET_STATE_INDEX = 'tips-out/state/SET'
-export const SET_CURRENCY = 'tips-out/currency/SET'
 export const SET_OPTIONS = 'tips-out/options/SET'
+export const SET_SETTINGS = 'tips-out/settings/SET'
 
 const initialState = {
     rates: {
@@ -15,13 +14,15 @@ const initialState = {
         base: '',
         rates: {},
     },
-    selectedStateIndex: 0,
-    selectedCurrency: 'NZD',
-    offshoreMargin: '2.10',
     options: {
         tip: true,
         state: true,
         margin: true,
+    },
+    settings: {
+        selectedStateIndex: 0,
+        selectedCurrency: 'NZD',
+        offshoreMargin: '2.10',
     }
 }
 
@@ -48,20 +49,15 @@ export default function reducer(state = initialState, action) {
             loading: false,
             error: 'Error while fetching rates'
         }
-    case SET_STATE_INDEX:
-        return {
-            ...state,
-            selectedStateIndex: action.payload.stateIndex
-        }
-    case SET_CURRENCY:
-        return {
-            ...state,
-            selectedCurrency: action.payload.currency
-        }
     case SET_OPTIONS:
         return {
             ...state,
             options: action.payload
+        }
+    case SET_SETTINGS:
+        return {
+            ...state,
+            settings: action.payload
         }
     default:
         return state
@@ -80,27 +76,16 @@ export function listRates() {
     }
 }
 
-export function setStateIndex(stateIndex) {
-    return {
-        type: SET_STATE_INDEX,
-        payload: {
-            stateIndex
-        }
-    }
-}
-
-export function setCurrency(currency) {
-    return {
-        type: SET_CURRENCY,
-        payload: {
-            currency
-        }
-    }
-}
-
 export function setOptions(options) {
     return {
         type: SET_OPTIONS,
         payload: options
+    }
+}
+
+export function setSettings(settings) {
+    return {
+        type: SET_SETTINGS,
+        payload: settings
     }
 }

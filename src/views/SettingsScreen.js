@@ -3,7 +3,7 @@ import { View, ActivityIndicator } from 'react-native'
 import { Container, Content, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import StateRates from '../stateRates'
 import { connect } from 'react-redux'
-import { listRates, setStateIndex, setCurrency } from '../reducer'
+import { listRates, setStateIndex, setCurrency, setSettings } from '../reducer'
 
 
 class SettingsScreen extends React.Component {
@@ -21,14 +21,20 @@ class SettingsScreen extends React.Component {
         }
     }
 
-    handleStateSelect = (selectedState) => {
-        this.setState({ selectedState })
-        this.props.setStateIndex(selectedState)
+    handleStateSelect = (selectedStateIndex) => {
+        this.setSettings('selectedStateIndex', selectedStateIndex)
     }
 
     handleCurrencySelect = (selectedCurrency) => {
-        this.setState({ selectedCurrency })
-        this.props.setCurrency(selectedCurrency)
+        this.setSettings('selectedCurrency', selectedCurrency)
+    }
+
+    setSettings(key, value) {
+        const settings = {
+            ...this.props.settings,
+            [key]: value,
+        }
+        this.props.setSettings(settings)
     }
 
     render() {
@@ -60,7 +66,7 @@ class SettingsScreen extends React.Component {
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
-                            selectedValue={this.state.selectedCurrency}
+                            selectedValue={this.props.settings.selectedCurrency}
                             onValueChange={this.handleCurrencySelect}
                         >
                             {countryRates.map((country, i) => {
@@ -79,7 +85,7 @@ class SettingsScreen extends React.Component {
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
-                            selectedValue={this.state.selectedState}
+                            selectedValue={this.props.settings.selectedStateIndex}
                             onValueChange={this.handleStateSelect}
                         >
                             {StateRates.map((state, i) => {
@@ -112,6 +118,7 @@ const mapStateToProps = state => {
         rates: rates,
         selectedStateIndex: state.selectedStateIndex,
         selectedCurrency: state.selectedCurrency,
+        settings: state.settings,
         loading: state.loading
     }
 }
@@ -119,7 +126,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     listRates,
     setStateIndex,
-    setCurrency
+    setCurrency,
+    setSettings,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
