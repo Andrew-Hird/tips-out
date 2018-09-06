@@ -4,7 +4,7 @@ import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
 import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, Icon, H2 } from 'native-base'
 import numeral from 'numeral'
-import { listRates, setOptions } from '../reducer'
+import { listRates, setPrice, setTipPercent, setOptions } from '../reducer'
 import StateRates from '../stateRates'
 
 import Divider from '../components/Divider'
@@ -35,11 +35,11 @@ class HomeScreen extends React.Component {
     }
 
     handlePriceInput = (price) => {
-        this.setState({ price })
+        this.props.setPrice(price)
     }
 
     handleTipInput = (tipPercent) => {
-        this.setState({ tipPercent })
+        this.props.setTipPercent(tipPercent)
     }
 
     handleTipSelect = () => {
@@ -67,22 +67,22 @@ class HomeScreen extends React.Component {
     }
 
     getTipAmount() {
-        const price = parseFloat(this.state.price) || 0
-        const tipPercent = parseFloat(this.state.tipPercent)
+        const price = parseFloat(this.props.price) || 0
+        const tipPercent = parseFloat(this.props.tipPercent)
 
         return price * (tipPercent / 100)
 
     }
 
     getTaxAmount() {
-        const price = parseFloat(this.state.price) || 0
+        const price = parseFloat(this.props.price) || 0
         const taxRate = parseFloat(this.props.selectedStateRate)
 
         return price * (taxRate / 100)
     }
 
     getOffshoreMarginAmount() {
-        const price = parseFloat(this.state.price) || 0
+        const price = parseFloat(this.props.price) || 0
         const offshoreMargin = parseFloat(this.props.offshoreMargin)
 
         const tip = this.props.options.tip? this.getTipAmount() : 0
@@ -92,7 +92,7 @@ class HomeScreen extends React.Component {
     }
 
     getCalculatedPrice() {
-        const price = parseFloat(this.state.price) || 0
+        const price = parseFloat(this.props.price) || 0
         const tip = this.props.options.tip? this.getTipAmount() : 0
         const tax = this.props.options.state? this.getTaxAmount() : 0
 
@@ -130,7 +130,7 @@ class HomeScreen extends React.Component {
                                         keyboardType='numeric'
                                         clearButtonMode='always'
                                         onChangeText={this.handlePriceInput}
-                                        value={this.state.price}
+                                        value={this.props.price}
                                         style={{ fontSize: 50 }}
                                     />
                                 </Item>
@@ -143,7 +143,7 @@ class HomeScreen extends React.Component {
                                         <CheckBox checked={this.props.options.tip} onPress={this.handleTipSelect} color="#007aff" />
                                     </Col>
                                     <Col size={75} style={styles.col}>
-                                        <Text>Tip ({this.state.tipPercent}%)</Text>
+                                        <Text>Tip ({this.props.tipPercent}%)</Text>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -153,7 +153,7 @@ class HomeScreen extends React.Component {
                                                 <Button
                                                     primary
                                                     disabled={!this.props.options.tip}
-                                                    bordered={this.state.tipPercent !== percent}
+                                                    bordered={this.props.tipPercent !== percent}
                                                     onPress={() => {
                                                         this.handleTipInput(percent)
                                                         this.hideKeyboard()
@@ -169,7 +169,7 @@ class HomeScreen extends React.Component {
                                         <Button
                                             primary
                                             disabled={!this.props.options.tip}
-                                            bordered={this.state.tipPercent === this.props.defaultPercents.find(percent => percent === this.state.tipPercent)}
+                                            bordered={this.props.tipPercent === this.props.defaultPercents.find(percent => percent === this.props.tipPercent)}
                                             onPress={() => {
                                                 this.setState({ showInputModal: true })
                                                 this.hideKeyboard()
@@ -279,7 +279,7 @@ class HomeScreen extends React.Component {
                                 keyboardType='numeric'
                                 clearButtonMode='always'
                                 onChangeText={this.handleTipInput}
-                                value={this.state.tipPercent}
+                                value={this.props.tipPercent}
                                 autoFocus={true}
                                 selectTextOnFocus={true}
                             />
@@ -293,6 +293,8 @@ class HomeScreen extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        price: state.price,
+        tipPercent: state.tipPercent,
         rates: state.rates.rates,
         baseCurrency: state.rates.base,
         selectedStateName: StateRates[state.settings.selectedStateIndex].name,
@@ -308,6 +310,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     listRates,
+    setPrice,
+    setTipPercent,
     setOptions
 }
 

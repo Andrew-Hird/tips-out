@@ -5,10 +5,14 @@ export const GET_RATES = 'tips-out/rates/LOAD'
 export const GET_RATES_SUCCESS = 'tips-out/rates/LOAD_SUCCESS'
 export const GET_RATES_FAIL = 'tips-out/rates/LOAD_FAIL'
 
+export const SET_PRICE = 'tips-out/price/SET'
+export const SET_TIP_PERCENT = 'tips-out/tip-percent/SET'
 export const SET_OPTIONS = 'tips-out/options/SET'
 export const SET_SETTINGS = 'tips-out/settings/SET'
 
 const initialState = {
+    price: '0',
+    tipPercent: '17.5',
     rates: {
         timestamp: '',
         base: '',
@@ -49,6 +53,16 @@ export default function reducer(state = initialState, action) {
             loading: false,
             error: 'Error while fetching rates'
         }
+    case SET_TIP_PERCENT:
+        return {
+            ...state,
+            tipPercent: action.payload
+        }
+    case SET_PRICE:
+        return {
+            ...state,
+            price: action.payload
+        }
     case SET_OPTIONS:
         return {
             ...state,
@@ -73,6 +87,20 @@ export function listRates() {
                 url: '/latest.json'
             }
         }
+    }
+}
+
+export function setPrice(price) {
+    return {
+        type: SET_PRICE,
+        payload: price
+    }
+}
+
+export function setTipPercent(tipPercent) {
+    return {
+        type: SET_TIP_PERCENT,
+        payload: tipPercent
     }
 }
 
