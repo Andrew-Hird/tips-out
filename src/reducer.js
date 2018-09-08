@@ -9,6 +9,7 @@ export const SET_PRICE = 'tips-out/price/SET'
 export const SET_TIP_PERCENT = 'tips-out/tip-percent/SET'
 export const SET_OPTIONS = 'tips-out/options/SET'
 export const SET_SETTINGS = 'tips-out/settings/SET'
+export const SHOW_INPUT_MODAL = 'tips-out/input-modal/show'
 
 const initialState = {
     price: '0',
@@ -27,7 +28,8 @@ const initialState = {
         selectedStateIndex: 0,
         selectedCurrency: 'NZD',
         offshoreMargin: '2.10',
-    }
+    },
+    showInputModal: false,
 }
 
 export default function reducer(state = initialState, action) {
@@ -73,6 +75,11 @@ export default function reducer(state = initialState, action) {
             ...state,
             settings: action.payload
         }
+    case SHOW_INPUT_MODAL:
+        return {
+            ...state,
+            showInputModal: action.payload
+        }
     default:
         return state
     }
@@ -115,5 +122,12 @@ export function setSettings(settings) {
     return {
         type: SET_SETTINGS,
         payload: settings
+    }
+}
+
+export function setShowInputModal(show) {
+    return {
+        type: SHOW_INPUT_MODAL,
+        payload: show
     }
 }

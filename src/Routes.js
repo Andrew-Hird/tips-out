@@ -2,7 +2,7 @@ import React from 'react'// eslint-disable-line
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import HomeScreen from './views/HomeScreen'
+import HomeScreen from './views/home/HomeScreen'
 import SettingsScreen from './views/SettingsScreen'
 import DetailsScreen from './views/DetailsScreen'
 
