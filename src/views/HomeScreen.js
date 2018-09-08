@@ -2,14 +2,15 @@ import React from 'react'
 import { Keyboard, View, StyleSheet } from 'react-native'
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
-import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, Icon, H2 } from 'native-base'
-import numeral from 'numeral'
+import { Container, Content, Item, Input, Label, Text, Button, Grid, Col, Row, CheckBox, Icon } from 'native-base'
 import { listRates, setPrice, setTipPercent, setOptions } from '../reducer'
 import StateRates from '../stateRates'
 
 import Divider from '../components/Divider'
 import TotalBadge from '../components/TotalBadge'
 import PriceBadge from '../components/PriceBadge'
+import Conversions from '../utilities/conversions'
+import Format from '../utilities/format'
 
 
 class HomeScreen extends React.Component {
@@ -67,54 +68,33 @@ class HomeScreen extends React.Component {
     }
 
     getTipAmount() {
-        const price = parseFloat(this.props.price) || 0
-        const tipPercent = parseFloat(this.props.tipPercent)
-
-        return price * (tipPercent / 100)
-
+        return Conversions.getTipAmount(this.props)
     }
 
     getTaxAmount() {
-        const price = parseFloat(this.props.price) || 0
-        const taxRate = parseFloat(this.props.selectedStateRate)
-
-        return price * (taxRate / 100)
+        return Conversions.getTaxAmount(this.props)
     }
 
     getOffshoreMarginAmount() {
-        const price = parseFloat(this.props.price) || 0
-        const offshoreMargin = parseFloat(this.props.offshoreMargin)
-
-        const tip = this.props.options.tip? this.getTipAmount() : 0
-        const tax = this.props.options.state? this.getTaxAmount() : 0
-
-        return (price + tip + tax) * (offshoreMargin / 100)
+        return Conversions.getOffshoreMarginAmount(this.props)
     }
 
     getCalculatedPrice() {
-        const price = parseFloat(this.props.price) || 0
-        const tip = this.props.options.tip? this.getTipAmount() : 0
-        const tax = this.props.options.state? this.getTaxAmount() : 0
-
-        return price + tip + tax
+        return Conversions.getCalculatedPrice(this.props)
     }
 
     getCalculatedPricePlusMargin() {
-        const calculatedPrice = this.getCalculatedPrice()
-        const margin = this.props.options.margin ? this.getOffshoreMarginAmount() : 0
-
-        return calculatedPrice + margin
+        return Conversions.getCalculatedPricePlusMargin(this.props)
     }
 
     formatPrice(price) {
-        return `${numeral(price).format('$0,0.00')} ${this.props.baseCurrency}`
+        const { baseCurrency } = this.props
+        return Format.formatPrice(price, baseCurrency)
     }
 
     convertAndFormatPrice(price) {
-        const conversionRate = parseFloat(this.props.selectedCurrencyRate)
-        const convertedPrice  = price * conversionRate
-
-        return `${numeral(convertedPrice).format('$0,0.00')} ${this.props.selectedCurrency}`
+        const { selectedCurrencyRate, selectedCurrency } = this.props
+        return Format.convertAndFormatPrice(price, selectedCurrencyRate, selectedCurrency)
     }
 
     render() {
