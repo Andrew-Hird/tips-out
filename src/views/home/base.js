@@ -99,7 +99,8 @@ const homeBase = (WrappedComponent) => {
         }
 
         format = (price) => {
-            return numeral(price).format('$0,0.00')
+            let priceFormat = price >= 10000 ? '($0.00a)' : '$0,0.00'
+            return numeral(price).format(priceFormat)
         }
 
         render() {
