@@ -10,7 +10,7 @@ import reducer from './reducer'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['rates', 'options', 'settings']
+    blacklist: ['showInputModal']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)
