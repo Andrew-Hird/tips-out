@@ -32,9 +32,9 @@ class HomeScreen extends React.Component {
         return (
             <Container>
                 <Content padder contentContainerStyle={{ flex: 1 }}>
-                    <Grid style={{ marginTop: 20 }}>
+                    <Grid style={{ marginTop: 15 }}>
                         <Row>
-                            <Col>
+                            <Col style={styles.col}>
                                 <Price />
                             </Col>
                         </Row>
@@ -45,7 +45,6 @@ class HomeScreen extends React.Component {
                         <Offshore />
                         <Divider />
                         <Totals />
-
                     </Grid>
                 </Content>
                 <Modal
