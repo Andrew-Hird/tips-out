@@ -3,7 +3,9 @@ import { View, ActivityIndicator } from 'react-native'
 import { Container, Content, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import StateRates from '../stateRates'
 import { connect } from 'react-redux'
-import { listRates, setStateIndex, setCurrency, setSettings } from '../reducer'
+import { listRates, setSettings } from '../reducer'
+
+import LastUpdated from './lastUpdated'
 
 
 class SettingsScreen extends React.Component {
@@ -96,6 +98,7 @@ class SettingsScreen extends React.Component {
                         </Picker>
                     </Item>
                 </Content>
+                <LastUpdated />
             </Container>
         )
     }
@@ -125,8 +128,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     listRates,
-    setStateIndex,
-    setCurrency,
     setSettings,
 }
 
