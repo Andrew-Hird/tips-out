@@ -10,6 +10,8 @@ import store from './src/store'
 import { listRates } from './src/reducer'
 import AppNavigator from './src/Routes'
 
+const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null
+
 
 export default class App extends React.Component {
     constructor(props) {
@@ -61,8 +63,7 @@ export default class App extends React.Component {
                 <PersistGate loading={null} persistor={this.persistor}>
                     <Root style={styles.container}>
                         <AppNavigator
-                            persistenceKey={'NavigationState5'}
-                            renderLoadingExperimental={() => <ActivityIndicator />}
+                            persistenceKey={navigationPersistenceKey}
                         />
                     </Root>
                 </PersistGate>
