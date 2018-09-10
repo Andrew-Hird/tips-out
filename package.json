@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "currency-symbol-map": "^4.0.4",
     "moment": "^2.22.2",
     "native-base": "^2.7.1",
     "numeral": "^2.0.6",

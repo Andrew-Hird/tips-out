@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, ActivityIndicator } from 'react-native'
 import { Container, Content, Item, Label, Picker, Icon, Button, Text } from 'native-base'
-import StateRates from '../stateRates'
 import { connect } from 'react-redux'
+import getSymbolFromCurrency from 'currency-symbol-map'
+import StateRates from '../stateRates'
 import { listRates, setSettings } from '../reducer'
 
 import LastUpdated from './lastUpdated'
@@ -72,8 +73,11 @@ class SettingsScreen extends React.Component {
                             onValueChange={this.handleCurrencySelect}
                         >
                             {countryRates.map((country, i) => {
+                                const { currency, rate } = country
+                                const currencySymbol = getSymbolFromCurrency(currency)
+
                                 return (
-                                    <Picker.Item key={i} label={`${country.currency} - ${country.rate}`} value={country.currency} />
+                                    <Picker.Item key={i} label={`${currency} - ${currencySymbol}${rate}`} value={currency} />
                                 )
                             })}
                         </Picker>

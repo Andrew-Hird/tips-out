@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Keyboard, StyleSheet } from 'react-native'
 import numeral from 'numeral'
+import getSymbolFromCurrency from 'currency-symbol-map'
 import { listRates, setOptions, setPrice, setShowInputModal, setTipPercent } from '../../reducer'
 import StateRates from '../../stateRates'
 
@@ -88,19 +89,27 @@ const homeBase = (WrappedComponent) => {
         }
 
         formatPrice = (price) => {
-            return `${this.format(price)} ${this.props.baseCurrency}`
+            const { baseCurrency } = this.props
+            const formattedPrice = this.format(price, baseCurrency)
+
+            return `${formattedPrice} ${baseCurrency}`
         }
 
         convertAndFormatPrice = (price) => {
-            const conversionRate = parseFloat(this.props.selectedCurrencyRate)
+            const { selectedCurrencyRate, selectedCurrency } = this.props
+            const conversionRate = parseFloat(selectedCurrencyRate)
             const convertedPrice  = price * conversionRate
+            const formattedPrice = this.format(convertedPrice, selectedCurrency)
 
-            return `${this.format(convertedPrice)} ${this.props.selectedCurrency}`
+            return `${formattedPrice} ${selectedCurrency}`
         }
 
-        format = (price) => {
-            let priceFormat = price >= 10000 ? '($0.00a)' : '$0,0.00'
-            return numeral(price).format(priceFormat)
+        format = (price, currency) => {
+            const currencySymbol = getSymbolFromCurrency(currency)
+            const priceFormat = price >= 10000 ? '(0.00a)' : '0,0.00'
+            const formattedPrice = numeral(price).format(priceFormat)
+
+            return `${currencySymbol}${formattedPrice}`
         }
 
         render() {
