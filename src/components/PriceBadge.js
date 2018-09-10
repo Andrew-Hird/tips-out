@@ -10,7 +10,7 @@ export default class PriceBadge extends React.Component {
                 style={[styles.badge, this.props.right && styles.right, this.props.disabled && styles.disabledBtn]}
                 info={!this.props.disabled}>
                 <Text style={styles.text}>
-                    {this.props.label}
+                    {`\u202D ${this.props.label}`}
                 </Text>
             </Badge>
         )

@@ -7,7 +7,9 @@ export default class TotalBadge extends React.Component {
     render() {
         return (
             <Badge style={[styles.badge, this.props.right && styles.right]} success>
-                <Text style={styles.text}>{this.props.label}</Text>
+                <Text style={styles.text}>
+                    {`\u202D ${this.props.label}`}
+                </Text>
             </Badge>
         )
     }
@@ -31,5 +33,5 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 10,
         paddingRight: 10,
-    }
+    },
 })

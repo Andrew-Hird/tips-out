@@ -77,7 +77,7 @@ class SettingsScreen extends React.Component {
                                 const currencySymbol = getSymbolFromCurrency(currency)
 
                                 return (
-                                    <Picker.Item key={i} label={`${currency} - ${currencySymbol}${rate}`} value={currency} />
+                                    <Picker.Item key={i} label={`\u202D ${currency} - ${currencySymbol}${rate}`} value={currency} />
                                 )
                             })}
                         </Picker>
