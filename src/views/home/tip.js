@@ -12,7 +12,9 @@ const Base = props => (
                     <CheckBox checked={props.options.tip} onPress={props.handleTipSelect} color="#007aff" />
                 </Col>
                 <Col size={75} style={styles.col}>
-                    <Text>Tip ({props.tipPercent}%)</Text>
+                    <Text style={[!props.options.tip && styles.textDisabled]}>
+                        Tip ({props.tipPercent}%)
+                    </Text>
                 </Col>
             </Row>
             <Row>

@@ -11,7 +11,9 @@ const Base = props => (
                 <CheckBox checked={props.options.margin} onPress={props.handleOffshoreSelectSelect} color="#007aff" />
             </Col>
             <Col size={35} style={styles.col}>
-                <Text>Offshore Service Margin ({props.offshoreMargin}%)</Text>
+                <Text style={[!props.options.margin && styles.textDisabled]}>
+                    Offshore Service Margin ({props.offshoreMargin}%)
+                </Text>
             </Col>
             <Col size={50} style={styles.col}>
                 <PriceBadge

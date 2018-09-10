@@ -172,6 +172,9 @@ export const styles = StyleSheet.create({
     col: {
         justifyContent: 'center',
     },
+    textDisabled: {
+        color: '#9b9b9b'
+    },
 })
 
 export default homeBase

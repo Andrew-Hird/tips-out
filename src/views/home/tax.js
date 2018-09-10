@@ -12,7 +12,9 @@ const Base = props => (
                     <CheckBox checked={props.options.state} onPress={props.handleStateSelect} color="#007aff" />
                 </Col>
                 <Col size={75} style={styles.col}>
-                    <Text>State Tax ({props.selectedStateName} - {props.selectedStateRate}%)</Text>
+                    <Text style={[!props.options.state && styles.textDisabled]}>
+                        State Tax ({props.selectedStateName} - {props.selectedStateRate}%)
+                    </Text>
                 </Col>
             </Row>
             <Row>
