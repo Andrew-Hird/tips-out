@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, StyleSheet, AppState } from 'react-native'
+import { StyleSheet, AppState } from 'react-native'
 import { Root } from 'native-base'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
