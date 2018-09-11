@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Container, Item, Input, Label, Grid, Col, Row } from 'native-base'
 import { setShowInputModal, setTipPercent } from '../../reducer'
 
+import DismissKeyboardView from '../../components/DismissKeyboardView'
 import Price from './price'
 import Tip from './tip'
 import Tax from './tax'
@@ -31,7 +32,7 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <Container>
-                <View style={styles.contentStyle}>
+                <DismissKeyboardView style={styles.contentStyle}>
                     <Grid style={{ marginTop: 15 }}>
                         <Row>
                             <Col style={styles.col}>
@@ -46,7 +47,7 @@ class HomeScreen extends React.Component {
                         <Divider />
                         <Totals />
                     </Grid>
-                </View>
+                </DismissKeyboardView>
                 <Modal
                     isVisible={this.props.showInputModal}
                     onBackdropPress={() => this.props.setShowInputModal(false)}
