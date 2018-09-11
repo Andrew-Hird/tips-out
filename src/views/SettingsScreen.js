@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, ActivityIndicator } from 'react-native'
-import { Container, Content, Item, Label, Picker, Icon, Button, Text } from 'native-base'
+import { View, ActivityIndicator, StyleSheet } from 'react-native'
+import { Container, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import { connect } from 'react-redux'
 import getSymbolFromCurrency from 'currency-symbol-map'
 import StateRates from '../stateRates'
@@ -44,7 +44,7 @@ class SettingsScreen extends React.Component {
         const countryRates = this.props.rates.rates
         return (
             <Container>
-                <Content padder contentContainerStyle={{ flex: 1 }}>
+                <View style={styles.contentStyle}>
                     <Button
                         block
                         info
@@ -101,7 +101,7 @@ class SettingsScreen extends React.Component {
                             })}
                         </Picker>
                     </Item>
-                </Content>
+                </View>
                 <LastUpdated />
             </Container>
         )
@@ -134,5 +134,12 @@ const mapDispatchToProps = {
     listRates,
     setSettings,
 }
+
+export const styles = StyleSheet.create({
+    contentStyle: {
+        flex: 1,
+        padding: 10,
+    }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)

@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
-import { Container, Content, Item, Input, Label, Grid, Col, Row } from 'native-base'
+import { Container, Item, Input, Label, Grid, Col, Row } from 'native-base'
 import { setShowInputModal, setTipPercent } from '../../reducer'
 
 import Price from './price'
@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <Container>
-                <Content padder contentContainerStyle={{ flex: 1 }}>
+                <View style={styles.contentStyle}>
                     <Grid style={{ marginTop: 15 }}>
                         <Row>
                             <Col style={styles.col}>
@@ -46,7 +46,7 @@ class HomeScreen extends React.Component {
                         <Divider />
                         <Totals />
                     </Grid>
-                </Content>
+                </View>
                 <Modal
                     isVisible={this.props.showInputModal}
                     onBackdropPress={() => this.props.setShowInputModal(false)}

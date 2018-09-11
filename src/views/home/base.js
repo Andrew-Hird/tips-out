@@ -184,6 +184,10 @@ export const styles = StyleSheet.create({
     textDisabled: {
         color: '#9b9b9b'
     },
+    contentStyle: {
+        flex: 1,
+        padding: 10,
+    }
 })
 
 export default homeBase
