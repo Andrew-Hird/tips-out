@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Text } from 'native-base'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -13,11 +13,9 @@ class LastUpdated extends React.Component {
 
     render() {
         return (
-            <View>
-                <Text style={styles.text}>
-                    Rates published: {moment.unix(this.props.timestamp).format('HH:mm - DD/MM/YY')}
-                </Text>
-            </View>
+            <Text style={styles.text}>
+                Rates published: {moment.unix(this.props.timestamp).format('HH:mm - DD/MM/YY')}
+            </Text>
         )
     }
 }
@@ -34,8 +32,7 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
     text: {
-        marginLeft: 10,
-        marginBottom: 10,
+        margin: 10,
         fontSize: 14,
         fontStyle: 'italic',
     }
