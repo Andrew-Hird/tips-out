@@ -1,7 +1,7 @@
 import React from 'react'// eslint-disable-line
 import { Text, Col, Row, CheckBox } from 'native-base'
 
-import homeBase, { styles } from './base'
+import homeBase, { styles } from '../../components/HomeBase'
 import PriceBadge from '../../components/PriceBadge'
 
 const Base = props => (

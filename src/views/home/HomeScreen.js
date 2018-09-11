@@ -12,7 +12,7 @@ import Offshore from './offshore'
 import Totals from './totals'
 import Divider from '../../components/Divider'
 
-import { styles } from './base'
+import { styles } from '../../components/HomeBase'
 
 class HomeScreen extends React.Component {
     constructor(props) {

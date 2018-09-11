@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Keyboard, StyleSheet } from 'react-native'
 import numeral from 'numeral'
 import getSymbolFromCurrency from 'currency-symbol-map'
-import { listRates, setOptions, setPrice, setShowInputModal, setTipPercent } from '../../reducer'
-import StateRates from '../../stateRates'
+import { listRates, setOptions, setPrice, setShowInputModal, setTipPercent } from '../reducer'
+import StateRates from '../stateRates'
 
 const homeBase = (WrappedComponent) => {
     class HOC extends React.Component {

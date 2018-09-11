@@ -1,7 +1,7 @@
 import React from 'react'// eslint-disable-line
 import { Item, Icon, Input } from 'native-base'
 
-import homeBase from './base'
+import homeBase from '../../components/HomeBase'
 
 const Base = props => (
     <Item rounded style={{ height: 80 }}>
