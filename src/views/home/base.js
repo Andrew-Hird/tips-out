@@ -105,7 +105,7 @@ const homeBase = (WrappedComponent) => {
         }
 
         format = (price, currency) => {
-            const currencySymbol = getSymbolFromCurrency(currency)
+            const currencySymbol = getSymbolFromCurrency(currency) || ''
             const priceFormat = price >= 10000 ? '(0.00a)' : '0,0.00'
             const formattedPrice = numeral(price).format(priceFormat)
 
