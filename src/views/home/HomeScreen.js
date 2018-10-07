@@ -1,8 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, TextInput } from 'react-native'
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux'
-import { Container, Item, Input, Label, Grid, Col, Row } from 'native-base'
+import { Container, Grid, Col, Row } from 'native-base'
 import { setShowInputModal, setTipPercent } from '../../reducer'
 
 import DismissKeyboardView from '../../components/DismissKeyboardView'
@@ -47,25 +47,23 @@ class HomeScreen extends React.Component {
                         <Divider />
                         <Totals />
                     </Grid>
-                </DismissKeyboardView>
-                <Modal
-                    isVisible={this.props.showInputModal}
-                    onBackdropPress={() => this.props.setShowInputModal(false)}
-                >
-                    <View style={styles.modalContent}>
-                        <Item floatingLabel>
-                            <Label>Tip %</Label>
-                            <Input
-                                keyboardType='numeric'
-                                clearButtonMode='always'
+                    <Modal
+                        isVisible={this.props.showInputModal}
+                        onBackdropPress={() => this.props.setShowInputModal(false)}
+                    >
+                        <View style={styles.modalContent}>
+                            <TextInput
+                                style={styles.modalInput}
                                 onChangeText={this.handleTipInput}
                                 value={this.props.tipPercent}
-                                autoFocus={true}
-                                selectTextOnFocus={true}
+                                autoFocus
+                                selectTextOnFocus
+                                keyboardType='numeric'
+                                clearButtonMode='always'
                             />
-                        </Item>
-                    </View>
-                </Modal>
+                        </View>
+                    </Modal>
+                </DismissKeyboardView>
             </Container>
         )
     }

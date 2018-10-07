@@ -171,6 +171,11 @@ export const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)'
     },
+    modalInput: {
+        borderBottomColor: '#D3D3D3',
+        borderBottomWidth: 1,
+        fontSize: 30,
+    },
     priceButton: {
         alignSelf: 'flex-end'
     },
