@@ -4,6 +4,7 @@ import { Root } from 'native-base'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+import SplashScreen from 'react-native-splash-screen'
 import moment from 'moment'
 
 import store from './src/store'
@@ -22,7 +23,7 @@ export default class App extends React.Component {
         }
     }
 
-    persistor = persistStore(store, null, this.getRates)
+    persistor = persistStore(store, null, this.persistCallback)
 
     componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange)
@@ -38,6 +39,11 @@ export default class App extends React.Component {
             this.getRates()
         }
         this.setState({appState: nextAppState})
+    }
+
+    persistCallback() {
+        SplashScreen.hide()
+        this.getRates()
     }
 
     getRates() {
