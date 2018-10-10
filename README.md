@@ -1,6 +1,6 @@
 # Tips Out
 
-## To get started
+### To get started
 React Native 0.57.1
 
 Node 10.4.0
@@ -11,11 +11,11 @@ yarn
 yarn ios
 
 ### RN Menu
-- cmd + d or shake device to bring up menu
+cmd + d or shake device to bring up menu
 
 Here you can enable live reload or debugging
 
 https://github.com/jhen0409/react-native-debugger
 
-
+#### Other notes
 Android is untested at this time
