@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Badge, Text } from 'native-base'
 import { StyleSheet } from 'react-native'
