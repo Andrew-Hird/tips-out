@@ -27,7 +27,7 @@ export default createBottomTabNavigator(
                 const { routeName } = navigation.state
                 let iconName
                 if (routeName === 'Home') {
-                    iconName = `ios-information-circle${focused ? '' : '-outline'}`
+                    iconName = 'ios-bulb'
                 } else if (routeName === 'Settings') {
                     iconName = 'ios-options'
                 }
