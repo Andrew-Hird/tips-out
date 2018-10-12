@@ -9,6 +9,7 @@ import moment from 'moment'
 import store from './src/store'
 import { listRates } from './src/reducer'
 import AppNavigator from './src/Routes'
+import LoadingScreen from './src/views/LoadingScreen'
 
 const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null
 
@@ -60,7 +61,7 @@ export default class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <PersistGate loading={null} persistor={this.persistor}>
+                <PersistGate loading={LoadingScreen} persistor={this.persistor}>
                     <Root style={styles.container}>
                         <AppNavigator
                             persistenceKey={navigationPersistenceKey}
