@@ -25,7 +25,7 @@ const initialState = {
         margin: true,
     },
     settings: {
-        selectedStateIndex: 0,
+        selectedStateIndex: 31,
         selectedCurrency: 'NZD',
         offshoreMargin: '2.10',
     },
