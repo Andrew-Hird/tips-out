@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, ActivityIndicator, StyleSheet } from 'react-native'
+import Modal from 'react-native-modal'
 import { Container, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import { connect } from 'react-redux'
 import getSymbolFromCurrency from 'currency-symbol-map'
@@ -15,6 +16,7 @@ class SettingsScreen extends React.Component {
         this.state = {
             selectedState: props.selectedStateIndex,
             selectedCurrency: props.selectedCurrency,
+            showInfoModal: false,
         }
     }
 
@@ -38,6 +40,10 @@ class SettingsScreen extends React.Component {
             [key]: value,
         }
         this.props.setSettings(settings)
+    }
+
+    toggleTaxInfo = () => {
+        this.setState({ showInfoModal: !this.state.showInfoModal })
     }
 
     render() {
@@ -100,9 +106,24 @@ class SettingsScreen extends React.Component {
                                 )
                             })}
                         </Picker>
+                        <Button transparent primary style={{ position: 'absolute', right: -15 }} onPress={this.toggleTaxInfo}>
+                            <Icon name='information-circle' />
+                        </Button>
                     </Item>
                 </View>
                 <LastUpdated />
+
+                <Modal
+                    isVisible={this.state.showInfoModal}
+                    onBackdropPress={this.toggleTaxInfo}
+                >
+                    <View style={styles.modalContent}>
+                        <Text>
+                            State tax is the sum of the State Rate and a average of Local / County Rates.
+                        </Text>
+                    </View>
+                </Modal>
+
             </Container>
         )
     }
@@ -139,6 +160,12 @@ export const styles = StyleSheet.create({
     contentStyle: {
         flex: 1,
         padding: 10,
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)'
     }
 })
 
