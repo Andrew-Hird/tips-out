@@ -89,9 +89,9 @@ export function listRates() {
     return {
         type: GET_RATES,
         payload: {
-            client: 'openExchangeRates',
+            client: 'api',
             request: {
-                url: '/latest.json'
+                url: '/GetRates'
             }
         }
     }

@@ -16,11 +16,10 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 const clients = {
-    openExchangeRates: {
+    api: {
         client: axios.create({
-            baseURL: Config.RATES.BASE_URL,
-            headers: { Authorization: `Token ${Config.RATES.TOKEN}` },
-            responseType: 'json'
+            baseURL: Config.API.BASE_URL,
+            headers: { 'x-api-key': Config.API.KEY },
         })
     }
 }
