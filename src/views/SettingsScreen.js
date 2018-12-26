@@ -60,6 +60,11 @@ class SettingsScreen extends React.Component {
         this.setState({ showOffshoreInfoModal: !this.state.showOffshoreInfoModal })
     }
 
+    setDefaultOffshore = () => {
+        this.handleOffshoreInput('2.10')
+        this.toggleOffshoreModal()
+    }
+
     render() {
         const countryRates = this.props.rates.rates
         return (
@@ -74,9 +79,7 @@ class SettingsScreen extends React.Component {
                         {this.props.loading ? (
                             <ActivityIndicator size="small" />
                         ) : (
-                            <View>
-                                <Icon name='refresh' />
-                            </View>
+                            <View><Icon name='refresh' /></View>
                         )}
                         <Text>Get Rates</Text>
                     </Button>
@@ -143,7 +146,7 @@ class SettingsScreen extends React.Component {
                     onBackdropPress={this.toggleTaxInfo}
                 >
                     <View style={styles.modalContent}>
-                        <Text>State tax is the sum of the State Rate and a average of Local / County Rates.</Text>
+                        <Text>State tax is calculated by summing the State Rate and a average of Local / County Rates.</Text>
                     </View>
                 </Modal>
                 <Modal
@@ -160,6 +163,15 @@ class SettingsScreen extends React.Component {
                             keyboardType='numeric'
                             clearButtonMode='always'
                         />
+                        <Button
+                            block
+                            info
+                            style={{ marginTop: 20 }}
+                            disabled={this.props.settings.offshoreMargin === '2.10'}
+                            onPress={this.setDefaultOffshore}
+                        >
+                            <Text>Set Default</Text>
+                        </Button>
                     </View>
                 </Modal>
                 <Modal
@@ -167,7 +179,7 @@ class SettingsScreen extends React.Component {
                     onBackdropPress={this.toggleOffshoreInfoModal}
                 >
                     <View style={styles.modalContent}>
-                        <Text>Offshore Service Margin is a percentage added on for credit card use when travelling abroad.</Text>
+                        <Text>Offshore Service Margin is a percentage added on when using a credit card abroad.</Text>
                     </View>
                 </Modal>
             </Container>
