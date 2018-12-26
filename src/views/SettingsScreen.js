@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, ActivityIndicator, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import Modal from 'react-native-modal'
 import { Container, Item, Label, Picker, Icon, Button, Text } from 'native-base'
 import { connect } from 'react-redux'
@@ -17,6 +17,8 @@ class SettingsScreen extends React.Component {
             selectedState: props.selectedStateIndex,
             selectedCurrency: props.selectedCurrency,
             showInfoModal: false,
+            showOffshoreInfoModal: false,
+            showOffshoreModal: false,
         }
     }
 
@@ -34,6 +36,10 @@ class SettingsScreen extends React.Component {
         this.setSettings('selectedCurrency', selectedCurrency)
     }
 
+    handleOffshoreInput = (offshoreMargin) => {
+        this.setSettings('offshoreMargin', offshoreMargin)
+    }
+
     setSettings(key, value) {
         const settings = {
             ...this.props.settings,
@@ -44,6 +50,14 @@ class SettingsScreen extends React.Component {
 
     toggleTaxInfo = () => {
         this.setState({ showInfoModal: !this.state.showInfoModal })
+    }
+
+    toggleOffshoreModal = () => {
+        this.setState({ showOffshoreModal: !this.state.showOffshoreModal })
+    }
+
+    toggleOffshoreInfoModal = () => {
+        this.setState({ showOffshoreInfoModal: !this.state.showOffshoreInfoModal })
     }
 
     render() {
@@ -110,20 +124,52 @@ class SettingsScreen extends React.Component {
                             <Icon name='information-circle' />
                         </Button>
                     </Item>
+                    <Item>
+                        <View style={styles.offshoreCont}>
+                            <Text style={styles.offshoreText}>Offshore Service Margin</Text>
+                            <TouchableOpacity onPress={this.toggleOffshoreModal} style={styles.offsboreTouchable}>
+                                <Text style={styles.offshoreTextBlack}>{this.props.settings.offshoreMargin}% </Text>
+                                <Icon name='arrow-down' style={styles.offshoreIcon} />
+                            </TouchableOpacity>
+                        </View>
+                        <Button transparent primary style={{ position: 'absolute', right: -15 }} onPress={this.toggleOffshoreInfoModal}>
+                            <Icon name='information-circle' />
+                        </Button>
+                    </Item>
                 </View>
                 <LastUpdated />
-
                 <Modal
                     isVisible={this.state.showInfoModal}
                     onBackdropPress={this.toggleTaxInfo}
                 >
                     <View style={styles.modalContent}>
-                        <Text>
-                            State tax is the sum of the State Rate and a average of Local / County Rates.
-                        </Text>
+                        <Text>State tax is the sum of the State Rate and a average of Local / County Rates.</Text>
                     </View>
                 </Modal>
-
+                <Modal
+                    isVisible={this.state.showOffshoreModal}
+                    onBackdropPress={this.toggleOffshoreModal}
+                >
+                    <View style={styles.modalContent}>
+                        <TextInput
+                            style={styles.modalInput}
+                            onChangeText={this.handleOffshoreInput}
+                            value={this.props.settings.offshoreMargin}
+                            autoFocus
+                            selectTextOnFocus
+                            keyboardType='numeric'
+                            clearButtonMode='always'
+                        />
+                    </View>
+                </Modal>
+                <Modal
+                    isVisible={this.state.showOffshoreInfoModal}
+                    onBackdropPress={this.toggleOffshoreInfoModal}
+                >
+                    <View style={styles.modalContent}>
+                        <Text>Offshore Service Margin is a percentage added on for credit card use when travelling abroad.</Text>
+                    </View>
+                </Modal>
             </Container>
         )
     }
@@ -161,12 +207,38 @@ export const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
     },
+    offshoreCont: {
+        height: 46,
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    offsboreTouchable: {
+        flexDirection: 'row'
+    },
+    offshoreIcon: {
+        marginLeft: 16
+    },
+    offshoreText: {
+        fontSize: 17,
+        color: '#575757',
+        paddingRight: 5,
+    },
+    offshoreTextBlack: {
+        fontSize: 17,
+        paddingLeft: 16,
+        paddingRight: 16,
+    },
     modalContent: {
         backgroundColor: 'white',
         padding: 22,
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)'
-    }
+    },
+    modalInput: {
+        borderBottomColor: '#D3D3D3',
+        borderBottomWidth: 1,
+        fontSize: 30,
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
