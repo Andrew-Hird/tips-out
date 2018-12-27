@@ -38,14 +38,11 @@ export default function reducer(state = initialState, action) {
         return { ...state, loading: true }
     case GET_RATES_SUCCESS:
         Toast.show({ text: 'Rates Updated' })
-        const data = action.payload.data
-        return { 
+        return {
             ...state, 
             loading: false, 
             rates: {
-                timestamp: data.timestamp,
-                base: data.base,
-                rates: data.rates
+                ...action.payload.data,
             }
         }
     case GET_RATES_FAIL:
