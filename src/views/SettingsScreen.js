@@ -1,13 +1,14 @@
 import React from 'react'
 import { View, ActivityIndicator, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import Modal from 'react-native-modal'
-import { Container, Item, Label, Picker, Icon, Button, Text } from 'native-base'
+import { Container, Item, Label, Picker, Icon, Button, Text, Toast } from 'native-base'
 import { connect } from 'react-redux'
 import getSymbolFromCurrency from 'currency-symbol-map'
 import StateRates from '../stateRates'
 import { listRates, setSettings } from '../reducer'
 
 import LastUpdated from './lastUpdated'
+import moment from 'moment/moment'
 
 
 class SettingsScreen extends React.Component {
@@ -65,6 +66,17 @@ class SettingsScreen extends React.Component {
         this.toggleOffshoreModal()
     }
 
+    getRates = () => {
+        const ratesTimestamp = moment.unix(this.props.rates.timestamp)
+        const hoursRates = moment().isSame(ratesTimestamp, 'hour')
+
+        if (!hoursRates) {
+            this.props.listRates()
+        } else {
+            Toast.show({ text: 'Rates already current' })
+        }
+    }
+
     render() {
         const countryRates = this.props.rates.rates
         return (
@@ -73,7 +85,7 @@ class SettingsScreen extends React.Component {
                     <Button
                         block
                         info
-                        onPress={this.props.listRates}
+                        onPress={this.getRates}
                         disabled={this.props.loading}
                     >
                         {this.props.loading ? (
