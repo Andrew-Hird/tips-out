@@ -1,5 +1,3 @@
-# Tips Out Privacy Policy
-
 ## Privacy Policy
 
 Andrew Hird built the Tips Out app as a Free app. This SERVICE is provided by Andrew Hird at no cost and is intended for use as is.
