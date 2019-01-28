@@ -189,6 +189,13 @@ export const styles = StyleSheet.create({
     textDisabled: {
         color: '#9b9b9b'
     },
+    percent: {
+        fontSize: 14,
+    },
+    percentDisabled: {
+        fontSize: 14,
+        color: '#9b9b9b'
+    },
     contentStyle: {
         flex: 1,
         padding: 10,

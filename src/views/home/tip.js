@@ -13,7 +13,10 @@ const Base = props => (
                 </Col>
                 <Col size={75} style={styles.col}>
                     <Text style={[!props.options.tip && styles.textDisabled]}>
-                        Tip ({props.tipPercent}%)
+                        Tip
+                        <Text style={[(!props.options.tip && styles.percentDisabled) || styles.percent]}>
+                            ({props.tipPercent}%)
+                        </Text>
                     </Text>
                 </Col>
             </Row>

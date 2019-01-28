@@ -12,7 +12,10 @@ const Base = props => (
             </Col>
             <Col size={35} style={styles.col}>
                 <Text style={[!props.options.margin && styles.textDisabled]}>
-                    Offshore Service Margin ({props.offshoreMargin}%)
+                    Offshore Service Margin
+                    <Text style={[(!props.options.margin && styles.percentDisabled) || (styles.percent)]}>
+                        ({props.offshoreMargin}%)
+                    </Text>
                 </Text>
             </Col>
             <Col size={50} style={styles.col}>

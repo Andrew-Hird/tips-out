@@ -13,7 +13,10 @@ const Base = props => (
                 </Col>
                 <Col size={75} style={styles.col}>
                     <Text style={[!props.options.state && styles.textDisabled]}>
-                        State Tax ({props.selectedStateName} - {props.selectedStateRate}%)
+                        State Tax
+                        <Text style={[(!props.options.state && styles.percentDisabled) || styles.percent]}>
+                            ({props.selectedStateName} - {props.selectedStateRate}%)
+                        </Text>
                     </Text>
                 </Col>
             </Row>

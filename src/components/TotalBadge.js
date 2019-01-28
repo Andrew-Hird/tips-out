@@ -29,9 +29,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     text: {
-        fontSize: 20,
-        padding: 10,
-        paddingLeft: 10,
-        paddingRight: 10,
+        fontSize: 18,
+        paddingTop: 9,
+        paddingBottom: 9,
+        paddingLeft: 0,
+        paddingRight: 5,
     },
 })
