@@ -14,67 +14,67 @@ const navigationPersistenceKey = __DEV__ ? 'NavigationStateDEV' : null
 
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            fontLoaded: false,
-            appState: AppState.currentState
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      fontLoaded: false,
+      appState: AppState.currentState
     }
+  }
 
-    persistor = persistStore(store, null, this.getRates)
+  persistor = persistStore(store, null, this.getRates)
 
-    componentDidMount() {
-        AppState.addEventListener('change', this._handleAppStateChange)
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange)
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange)
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      console.log('App has come to the foreground!')
+      this.getRates()
     }
+    this.setState({appState: nextAppState})
+  }
 
-    componentWillUnmount() {
-        AppState.removeEventListener('change', this._handleAppStateChange)
+  getRates() {
+    const state = store.getState()
+    if (state.rates && state.rates.timestamp) {
+      const ratesTimestamp = moment.unix(state.rates.timestamp)
+      const todaysRates = moment().isSame(ratesTimestamp, 'day')
+
+      if (!todaysRates) {
+        console.log('Updating rates')
+        store.dispatch(listRates())
+      } else {
+        console.log('Rates current')
+      }
+    } else {
+      store.dispatch(listRates())
     }
+  }
 
-    _handleAppStateChange = (nextAppState) => {
-        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-            console.log('App has come to the foreground!')
-            this.getRates()
-        }
-        this.setState({appState: nextAppState})
-    }
-
-    getRates() {
-        const state = store.getState()
-        if (state.rates && state.rates.timestamp) {
-            const ratesTimestamp = moment.unix(state.rates.timestamp)
-            const todaysRates = moment().isSame(ratesTimestamp, 'day')
-
-            if (!todaysRates) {
-                console.log('Updating rates')
-                store.dispatch(listRates())
-            } else {
-                console.log('Rates current')
-            }
-        } else {
-            store.dispatch(listRates())
-        }
-    }
-
-    render() {
-        return (
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={this.persistor}>
-                    <Root style={styles.container}>
-                        <AppNavigator
-                            persistenceKey={navigationPersistenceKey}
-                        />
-                    </Root>
-                </PersistGate>
-            </Provider>
-        )
-    }
+  render() {
+    return (
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={this.persistor}>
+            <Root style={styles.container}>
+              <AppNavigator
+                  persistenceKey={navigationPersistenceKey}
+              />
+            </Root>
+          </PersistGate>
+        </Provider>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-between'
-    }
+  container: {
+    flex: 1,
+    justifyContent: 'space-between'
+  }
 })

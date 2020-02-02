@@ -1,17 +1,4 @@
 {
-  "expo": {
-    "sdkVersion": "27.0.0",
-    "name": "Tips Out",
-    "icon": "",
-    "version": "0.0.1",
-    "slug": "tips-out",
-    "ios": {
-      "bundleIdentifier": "com.meow.tipsout"
-    },
-    "android": {
-      "package": "com.meow.tipsout"
-    }
-  },
-  "name": "tipsout",
+  "name": "TipsOut",
   "displayName": "Tips Out"
 }

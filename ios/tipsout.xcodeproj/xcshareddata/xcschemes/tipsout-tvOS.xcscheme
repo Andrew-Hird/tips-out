@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "tipsout-tvOS.app"
-               BlueprintName = "tipsout-tvOS"
-               ReferencedContainer = "container:tipsout.xcodeproj">
+               BuildableName = "TipsOut-tvOS.app"
+               BlueprintName = "TipsOut-tvOS"
+               ReferencedContainer = "container:TipsOut.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "tipsout-tvOSTests.xctest"
-               BlueprintName = "tipsout-tvOSTests"
-               ReferencedContainer = "container:tipsout.xcodeproj">
+               BuildableName = "TipsOut-tvOSTests.xctest"
+               BlueprintName = "TipsOut-tvOSTests"
+               ReferencedContainer = "container:TipsOut.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "tipsout-tvOSTests.xctest"
-               BlueprintName = "tipsout-tvOSTests"
-               ReferencedContainer = "container:tipsout.xcodeproj">
+               BuildableName = "TipsOut-tvOSTests.xctest"
+               BlueprintName = "TipsOut-tvOSTests"
+               ReferencedContainer = "container:TipsOut.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "tipsout-tvOS.app"
-            BlueprintName = "tipsout-tvOS"
-            ReferencedContainer = "container:tipsout.xcodeproj">
+            BuildableName = "TipsOut-tvOS.app"
+            BlueprintName = "TipsOut-tvOS"
+            ReferencedContainer = "container:TipsOut.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "tipsout-tvOS.app"
-            BlueprintName = "tipsout-tvOS"
-            ReferencedContainer = "container:tipsout.xcodeproj">
+            BuildableName = "TipsOut-tvOS.app"
+            BlueprintName = "TipsOut-tvOS"
+            ReferencedContainer = "container:TipsOut.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "tipsout-tvOS.app"
-            BlueprintName = "tipsout-tvOS"
-            ReferencedContainer = "container:tipsout.xcodeproj">
+            BuildableName = "TipsOut-tvOS.app"
+            BlueprintName = "TipsOut-tvOS"
+            ReferencedContainer = "container:TipsOut.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

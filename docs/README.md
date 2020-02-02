@@ -1,1 +1,0 @@
-# Tips Out Privacy Policy
