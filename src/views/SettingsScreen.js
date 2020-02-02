@@ -135,7 +135,7 @@ class SettingsScreen extends React.Component {
                                 )
                             })}
                         </Picker>
-                        <Button transparent primary style={{ position: 'absolute', right: -15 }} onPress={this.toggleTaxInfo}>
+                        <Button transparent style={{ position: 'absolute', right: -15 }} onPress={this.toggleTaxInfo}>
                             <Icon name='information-circle' />
                         </Button>
                     </Item>
@@ -147,7 +147,7 @@ class SettingsScreen extends React.Component {
                                 <Icon name='arrow-down' style={styles.offshoreIcon} />
                             </TouchableOpacity>
                         </View>
-                        <Button transparent primary style={{ position: 'absolute', right: -15 }} onPress={this.toggleOffshoreInfoModal}>
+                        <Button transparent style={{ position: 'absolute', right: -15 }} onPress={this.toggleOffshoreInfoModal}>
                             <Icon name='information-circle' />
                         </Button>
                     </Item>
