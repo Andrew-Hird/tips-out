@@ -175,6 +175,7 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#D3D3D3',
         borderBottomWidth: 1,
         fontSize: 30,
+        color: 'black',
     },
     priceButton: {
         alignSelf: 'flex-end'
