@@ -22,6 +22,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* TipsOutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TipsOutTests.m */; };
 		316700BE37014C168162D158 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E34781A95B6C4E6EABE3979F /* Zocial.ttf */; };
+		490BAAED23E658530036307E /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 490BAAEC23E658530036307E /* AppCenter-Config.plist */; };
 		6251A9534DE44B1CB5D9CD3C /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CD53DCA4B4FC6B1AA190F /* Octicons.ttf */; };
 		6398CB085D24458CA19E8F07 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 701FAF4DFDA047EDA5431CAD /* Foundation.ttf */; };
 		6BFC34D24D7B44D69E120962 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C01B0F58B98F4F4AB43038CD /* Fontisto.ttf */; };
@@ -84,6 +85,7 @@
 		3F7CD53DCA4B4FC6B1AA190F /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		401CE59619A1704C01430E06 /* Pods-TipsOut-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipsOut-tvOS.release.xcconfig"; path = "Target Support Files/Pods-TipsOut-tvOS/Pods-TipsOut-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		4857157ED5A99B6447F98FAA /* libPods-TipsOut-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TipsOut-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		490BAAEC23E658530036307E /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		4DCA89ACA7AB6D59FB9806CA /* Pods-TipsOut-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipsOut-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-TipsOut-tvOSTests/Pods-TipsOut-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		701FAF4DFDA047EDA5431CAD /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		76CB94C9A7184700828EB36E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				490BAAEC23E658530036307E /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* TipsOut */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TipsOutTests */,
@@ -416,6 +419,7 @@
 				0B607C0B359843268DC65C54 /* FontAwesome.ttf in Resources */,
 				961D5C20EF34446894167F7A /* FontAwesome5_Brands.ttf in Resources */,
 				C4F9039AA1DC42A0B9FE67FE /* FontAwesome5_Regular.ttf in Resources */,
+				490BAAED23E658530036307E /* AppCenter-Config.plist in Resources */,
 				CE4C516AA1E24508BAEBFF97 /* FontAwesome5_Solid.ttf in Resources */,
 				6BFC34D24D7B44D69E120962 /* Fontisto.ttf in Resources */,
 				6398CB085D24458CA19E8F07 /* Foundation.ttf in Resources */,
