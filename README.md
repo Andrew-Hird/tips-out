@@ -1,4 +1,4 @@
-#Tips Out
+# Tips Out
 
 - Set config.json
 - `yarn install`
