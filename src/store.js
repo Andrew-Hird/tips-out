@@ -2,9 +2,8 @@ import { createStore, applyMiddleware } from 'redux'
 import { multiClientMiddleware } from 'redux-axios-middleware'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { API_BASE_URL, API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
-
-import Config from '../config.json'
 import reducer from './reducer'
 
 const persistConfig = {
@@ -18,8 +17,8 @@ const persistedReducer = persistReducer(persistConfig, reducer)
 const clients = {
     api: {
         client: axios.create({
-            baseURL: Config.API.BASE_URL,
-            headers: { 'x-api-key': Config.API.KEY },
+            baseURL: API_BASE_URL,
+            headers: { 'x-api-key': API_KEY },
         })
     }
 }
