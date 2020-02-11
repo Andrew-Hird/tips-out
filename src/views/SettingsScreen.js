@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, ActivityIndicator, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import Modal from 'react-native-modal'
-import { Container, Item, Label, Picker, Icon, Button, Text, Toast } from 'native-base'
+import { Container, Item, Label, Picker, Icon, Button, Text, Toast, Header, Left, Body, Input } from 'native-base'
 import { connect } from 'react-redux'
 import getSymbolFromCurrency from 'currency-symbol-map'
 import StateRates from '../stateRates'
@@ -20,6 +20,8 @@ class SettingsScreen extends React.Component {
             showInfoModal: false,
             showOffshoreInfoModal: false,
             showOffshoreModal: false,
+            searchCurrencies: props.rates.rates || [],
+            searchStateRates: StateRates || [],
         }
     }
 
@@ -29,12 +31,37 @@ class SettingsScreen extends React.Component {
         }
     }
 
+    handleCurrencySearch = (searchTerm) => {
+        const searchResults = this.props.rates.rates.filter(curr => curr.currency.toLowerCase().startsWith(searchTerm.toLowerCase()))
+        this.setState({ searchCurrencies: searchResults })
+    }
+
+    handleCurrencyBack = (backAction) => {
+        this.setState({ searchCurrencies: this.props.rates.rates })
+        backAction()
+    }
+
+    handleStateRateSearch = (searchTerm) => {
+        const searchResults = StateRates.filter(state => state.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
+        this.setState({ searchStateRates: searchResults })
+    }
+
+    handleStateRateBack = (backAction) => {
+        this.setState({ searchStateRates: StateRates })
+        backAction()
+    }
+
     handleStateSelect = (selectedStateIndex) => {
-        this.setSettings('selectedStateIndex', selectedStateIndex)
+        const stateName = this.state.searchStateRates[selectedStateIndex].name
+        const origIdx = StateRates.findIndex(state => state.name === stateName)
+
+        this.setSettings('selectedStateIndex', origIdx)
+        this.setState({ searchStateRates: StateRates })
     }
 
     handleCurrencySelect = (selectedCurrency) => {
         this.setSettings('selectedCurrency', selectedCurrency)
+        this.setState({ searchCurrencies: this.props.rates.rates })
     }
 
     handleOffshoreInput = (offshoreMargin) => {
@@ -78,7 +105,6 @@ class SettingsScreen extends React.Component {
     }
 
     render() {
-        const countryRates = this.props.rates.rates
         return (
             <Container>
                 <View style={styles.contentStyle}>
@@ -98,8 +124,26 @@ class SettingsScreen extends React.Component {
                     <Item picker>
                         <Label>Home Currency</Label>
                         <Picker
+                            renderHeader={backAction =>
+                                <Header>
+                                    <Left>
+                                        <Button transparent onPress={() => this.handleCurrencyBack(backAction)}>
+                                            <Icon name="arrow-back" />
+                                        </Button>
+                                    </Left>
+                                    <Body style={{ flex: 3 }}>
+                                        <Item>
+                                            <Input
+                                                placeholder="Search currency"
+                                                autoCapitalize={false}
+                                                autoCorrect={false}
+                                                onChangeText={this.handleCurrencySearch}
+                                            />
+                                            <Icon name="ios-search" />
+                                        </Item>
+                                    </Body>
+                                </Header>}
                             mode="dropdown"
-                            iosHeader="Home Currency"
                             iosIcon={<Icon name="arrow-down" />}
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
@@ -107,7 +151,7 @@ class SettingsScreen extends React.Component {
                             selectedValue={this.props.settings.selectedCurrency}
                             onValueChange={this.handleCurrencySelect}
                         >
-                            {countryRates.map((country, i) => {
+                            {this.state.searchCurrencies.map((country, i) => {
                                 const { currency, rate } = country
                                 const currencySymbol = getSymbolFromCurrency(currency) || ''
 
@@ -120,8 +164,26 @@ class SettingsScreen extends React.Component {
                     <Item picker>
                         <Label>State</Label>
                         <Picker
+                            renderHeader={backAction =>
+                                <Header>
+                                    <Left>
+                                        <Button transparent onPress={() => this.handleStateRateBack(backAction)}>
+                                            <Icon name="arrow-back" />
+                                        </Button>
+                                    </Left>
+                                    <Body style={{ flex: 3 }}>
+                                        <Item>
+                                            <Input
+                                                placeholder="Search states"
+                                                autoCapitalize={false}
+                                                autoCorrect={false}
+                                                onChangeText={this.handleStateRateSearch}
+                                            />
+                                            <Icon name="ios-search" />
+                                        </Item>
+                                    </Body>
+                                </Header>}
                             mode="dropdown"
-                            iosHeader="Destination Currency"
                             iosIcon={<Icon name="arrow-down" />}
                             placeholder="State"
                             placeholderStyle={{ color: '#bfc6ea' }}
@@ -129,7 +191,7 @@ class SettingsScreen extends React.Component {
                             selectedValue={this.props.settings.selectedStateIndex}
                             onValueChange={this.handleStateSelect}
                         >
-                            {StateRates.map((state, i) => {
+                            {this.state.searchStateRates.map((state, i) => {
                                 return (
                                     <Picker.Item key={i} label={`${state.name} - ${state.combined}%`} value={i} />
                                 )
