@@ -15,7 +15,7 @@
     "appcenter-crashes": "2.6.1",
     "axios": "^0.18.1",
     "currency-symbol-map": "^4.0.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "native-base": "^2.13.8",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.2",
